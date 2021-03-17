@@ -1,29 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import productsModule from './modules/productsModule'
+import getOneProduct from './modules/getOneProduct'
+import login from './modules/login'
+
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products:[]
-  },
-  getters:{
-    products: state => state.products
-    
   },
   mutations: {
-    GET_PRODUCTS(state, products) {
-      state.products = products
-      console.log(products)
-      }
   },
   actions: {
-    getProducts({ commit }) {
-      axios.get('http://localhost:9999/api/products')
-      .then(response => {
-        commit('GET_PRODUCTS', response.data)
-      })
-      }
+  },
+  modules: {
+    productsModule,
+    getOneProduct,
+    login
   }
- 
 })
