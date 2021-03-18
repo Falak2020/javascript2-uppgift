@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-light">
+  <div >
     <Appheader /> 
   
     <router-view/>
@@ -22,5 +22,12 @@ export default {
      padding:0;
     }
    .bg{
-     background-color: #1976D2; }
+     background-color: #1976D2;
+    }
+    html,body{
+      background-color: rgb(247, 243, 238);
+    }
+    .text-color{
+      color: #0D47A1;
+    }
 </style>

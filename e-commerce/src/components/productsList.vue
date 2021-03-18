@@ -1,10 +1,10 @@
 <template>
 
-    <router-link  :to="{ path: '/details/'+product._id}" class="card">
+    <router-link  :to="{ path: '/details/'+product._id}" class="card hover-shadow text-color">
     
         <img :src="product.image" class="card-img-top" alt="..." style="height:300px"/>
-         <div class="card-body">
-                <h5 class="card-title">{{product.name}}</h5>
+         <div class="card-body ">
+                <h5 class="card-title text-decoration-underline">{{product.name}}</h5>
                 <p class="card-text">
                   {{product.short}}
                 </p>
