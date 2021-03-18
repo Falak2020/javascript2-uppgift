@@ -4,16 +4,19 @@ export default ({
     state: {
       token:'',
       error:'',
-      status:'login'
+      status:'login',
+      username:''
     },
     getters:{
       token: state => state.token,
       error: state => state.error,
-      status:state=> state.status
+      status:state=> state.status,
+      username:state=>state.username
     },
     mutations: {
-      GET_TOKEN(state,token) {
-        state.token = token,
+      GET_TOKEN(state,data) {
+        state.token = data.token,
+        state.username = data.username
         state.status = 'logout'
         },
       GET_ERROR(state) {
@@ -31,13 +34,13 @@ export default ({
               password:payload.password
         })
         .then(response => {
-          commit('GET_TOKEN', response.data.token)
+          commit('GET_TOKEN', response.data)
         })
         .catch(()=> commit('GET_ERROR'))
         },
       logout({commit}){
        commit('DELETE_TOKEN')
-      }
+      },
     }
    
   })

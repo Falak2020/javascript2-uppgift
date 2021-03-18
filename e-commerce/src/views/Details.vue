@@ -20,6 +20,7 @@
              <p class="card-text">
               <small class="text-muted">{{product.modified}}</small>
             </p>
+            <button class="btn btn-primary" @click="addToCart"><i class="fas fa-shopping-cart me-1"></i>add to cart</button>
            </div>
           </div>
        </div>
@@ -33,14 +34,17 @@ export default {
  props:['id'],
 
 methods:{
-  ...mapActions(['getProduct']),
-  
+  ...mapActions(['getProduct','addTo']),
+    addToCart(){
+      this.addTo(this.product)
+    }
 },
 computed:{
   ...mapGetters(['product'])
 },
 created(){
   this.getProduct(this.id)
+  
 }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div class="container" >
-      <div  ref="form" class="text-center text-success border bg-light mt-5" >
+  <div class="container border bg-light" >
+      <div  ref="form" class="text-center text-success mt-5" >
             <form class="container mt-3  p-3"  @submit.prevent="newUser" >
                <input type="text" v-model="user.firstName" class="mt-3 form-control" placeholder="Enter your firstname">
                <input type="text" v-model="user.lastName" class="mt-3 form-control" placeholder="Enter your lastname">

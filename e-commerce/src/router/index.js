@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Details from '../views/Details.vue'
-import login from '../views/login.vue'
-import register from '../views/register.vue'
+import login from '../views/userLogin.vue'
+import shoppingCart from '../views/shoppingCart.vue'
 
 
 
@@ -16,16 +16,16 @@ const routes = [
     component: Home
   },
   {
-    path: '/login',
+    path: '/userLogin',
     name: 'login',
     component: login
   },
-  
   {
-    path: '/login/register',
-    name: 'register',
-    component: register
+    path: '/shoppingCart',
+    name: 'shoppingCart',
+    component: shoppingCart
   },
+  
   {
     path: '/Details/:id',
     name: 'Details',

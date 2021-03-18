@@ -11,7 +11,6 @@ export default ({
     mutations: {
       GET_PRODUCT(state, product) {
         state.product = product
-        console.log(product)
         }
     },
     actions: {

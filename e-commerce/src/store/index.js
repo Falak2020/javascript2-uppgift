@@ -4,7 +4,7 @@ import productsModule from './modules/productsModule'
 import getOneProduct from './modules/getOneProduct'
 import login from './modules/login'
 import register from './modules/register'
-
+import shoppingCart from './modules/shoppingCart'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -18,6 +18,7 @@ export default new Vuex.Store({
     productsModule,
     getOneProduct,
     login,
-    register
+    register,
+    shoppingCart
   }
 })

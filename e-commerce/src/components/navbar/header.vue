@@ -13,6 +13,7 @@
        <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto" >
             <router-link class="nav-link me-5 " aria-current="page" to='/'>  <i class="fas fa-home"></i></router-link> 
+            <router-link class="nav-link me-5 " aria-current="page" to='/shoppingCart'> <i class="fas fa-shopping-cart"></i></router-link>
             <!-- <router-link   class="nav-link" aria-current="page" to='/login'> 
                <i :class="loginClasses"  @mouseenter="toggle" @click="logout"></i> 
             </router-link> -->
@@ -21,7 +22,7 @@
             id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
             </i>
              <ul class="dropdown-menu " aria-labelledby="dropdownMenu2">
-                <li class="dropdown-item" @click="logout()" ><router-link to='/login' >{{status}}</router-link></li>
+                <li class="dropdown-item" @click="logout()" ><router-link to='/userLogin' >{{status}}</router-link></li>
             </ul>
           </div> 
         <!-- <router-link class="nav-link" :to="'/new/'+token "> new product</router-link>

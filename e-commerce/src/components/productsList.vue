@@ -6,8 +6,12 @@
          <div class="card-body ">
                 <h5 class="card-title text-decoration-underline">{{product.name}}</h5>
                 <p class="card-text">
+                  {{product.price}} kr
+                </p>
+                <p class="card-text">
                   {{product.short}}
                 </p>
+
          </div>
     
     </router-link>

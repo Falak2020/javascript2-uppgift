@@ -37,7 +37,6 @@ exports.registerUser = (req, res) => {
             email: req.body.email,
             passwordHash: hash
           })
-
           newUser.save()
             .then(() => {
               res.status(201).json({
@@ -68,7 +67,8 @@ exports.login = (req, res) => {
         return res.status(404).json({
           statusCode: 404,
           statusCode: false,
-          message: 'Incorrect email or password'
+          message: 'Incorrect email or password',
+          
         })
       }
       else {
@@ -84,8 +84,8 @@ exports.login = (req, res) => {
                 statusCode: 200,
                 statusCode: true,
                 message: 'correct email ',
-                token: auth.generateToken(user)
-
+                token: auth.generateToken(user),
+                username:user.firstName
               })
 
             }
