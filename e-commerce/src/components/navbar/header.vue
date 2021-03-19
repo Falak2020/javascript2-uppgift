@@ -13,14 +13,18 @@
        <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto" >
             <router-link class="nav-link me-5 " aria-current="page" to='/'>  <i class="fas fa-home"></i></router-link> 
-            <router-link class="nav-link me-5 " aria-current="page" to='/shoppingCart'> <i class="fas fa-shopping-cart"></i></router-link>
+            <router-link class="pos-r nav-link me-5 " aria-current="page" to='/shoppingCart'> 
+               <i class=" fas fa-shopping-cart"></i>
+               <span class="text-danger pos-a d-flex align-items-center justify-content-center"> {{shoppings.length}} </span>
+            </router-link>
             <!-- <router-link   class="nav-link" aria-current="page" to='/login'> 
                <i :class="loginClasses"  @mouseenter="toggle" @click="logout"></i> 
             </router-link> -->
            <div class="dropdown nav-link" >
-            <i class="" :class="loginClasses"  @mouseenter="toggle" 
+            <i :class="loginClasses"  @mouseenter="toggle" 
             id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
             </i>
+            
              <ul class="dropdown-menu " aria-labelledby="dropdownMenu2">
                 <li class="dropdown-item" @click="logout()" ><router-link to='/userLogin' >{{status}}</router-link></li>
             </ul>
@@ -43,7 +47,7 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['token','status']),
+    ...mapGetters(['token','status','shoppings']),
     loginClasses(){
        if(this.token){
          return {
@@ -77,4 +81,19 @@ export default {
  li{
    font-size: 1rem;
  }
+ .pos-a{
+   position: absolute;
+   top:-10px;
+   right:0;
+   
+ }
+ .pos-r{
+   position: relative;
+ }
+ span{
+   font-size: 1.3rem;
+   font-weight: bold;
+   
+ }
+
 </style>

@@ -4,6 +4,7 @@ const app = express()
  const cors=require('cors')
 const productController=require('./controllers')
 const userController=require('./userconteroller')
+const cartController = require('./cartController')
  app.use(cors())
 // app.use((req, res, next) => {
 //     res.header("Access-Control-Allow-Origin", "*")
@@ -19,5 +20,7 @@ app.use(express.json())
 app.use('/api/products',productController)
 
 app.use('/api/users',userController)
+
+app.use('/api/shoppings',cartController)
 module.exports = app
 

@@ -9,19 +9,20 @@
               <div class="col-md-8">
                  <h5 class="card-header">{{shop.name}}</h5>
                  <div class="text-end">
-                     <select class="p-2" >
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
+                     <select class="p-2" v-model="select" @change="calPrice(shop.price)">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                      </select>
                  </div>
                  
                  <div class="card-body">
                      <h5 class="card-title">{{shop.short}}</h5>
                  </div> 
-                 <div class="text-end">{{shop.price}} kr</div>
+                 <div v-if="!select"  class="text-end">{{shop.price}} kr</div>
+                 <div v-else class="text-end">{{newPrice}} kr</div>
               </div>
            </div> 
         </div>
@@ -31,10 +32,25 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
+ data(){
+     return{
+        select:'',
+     }
+ },
  computed:{
-     ...mapGetters(['shoppings'])
+     ...mapGetters(['shoppings','newPrice'])
+ },
+ methods:{
+     ...mapActions(['calculate']),
+     calPrice(price){
+        let params={
+            select:parseInt(this.select),
+            price
+        }
+        this.calculate(params)
+    }
  }
 }
 </script>

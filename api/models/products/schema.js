@@ -10,4 +10,5 @@ const schema=mongoDb.Schema({
 
 })
 
+
 module.exports=mongoDb.model('Product',schema)
