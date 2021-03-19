@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const cartModel = require('./models/shoppingCart/cartModel');
 
-router.post('/addToCart',cartModel.saveProduct);
+router.post('/add',cartModel.saveProduct);
 
 
 

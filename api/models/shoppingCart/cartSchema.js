@@ -1,9 +1,6 @@
 mongoDb=require('mongoose')
 const CartSchema = mongoDb.Schema({
-    customerID: {
-        type: String,
-        required: true
-    },
+    // _id:{ type:String},
     cartContents: {
         type: [Object]
     },
@@ -13,5 +10,4 @@ const CartSchema = mongoDb.Schema({
     }
 })
 
-const Cart = mongoDb.model('Cart', CartSchema)
-module.exports = Cart
+module.exports = mongoDb.model('Cart', CartSchema)
