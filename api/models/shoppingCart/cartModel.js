@@ -4,8 +4,8 @@ const Card=require('./cartSchema')
 exports.saveProduct=(req,res)=>{
    
    const collection = new Card({
-    // _id:req.user._id,//jag tar det from user
-    cartContents:req.body,
+    _id:req.body._id,
+    cartContents:req.body
    })
     collection.save()
     .then(()=>{

@@ -41,6 +41,7 @@ export default ({
       logout({commit}){
        commit('DELETE_TOKEN')
       },
+      
     }
    
   })

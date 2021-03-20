@@ -53,12 +53,11 @@ export default {
         this.calculate(params)
     },
     addCart(){
-      //  let payload={
-      //   _id:this.token,
-      //   cart:this.shoppings
-      //  }
-      console.log(this.shoppings)
-       this.postCard(this.shoppings)
+       let payload={
+        _id:this.token,
+        cart:this.shoppings
+       }
+       this.postCard(payload)
     }
 
  }

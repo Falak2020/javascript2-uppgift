@@ -12,11 +12,11 @@ export default {
      }
     },
     actions: {
-      postCard:({commit},cart)=>{
-        
+      postCard:({commit},payload)=>{
+        console.log(payload._id)
        axios.post('http://localhost:9999/api/shoppings/add',{
-         
-         cartContents:cart
+         _id:payload._id,
+         cartContents:payload
        })
        
        .then(res=>commit('SAVE',res.data))
