@@ -1,7 +1,5 @@
 <template>
  <div class="container mt-5">
-    <button @click="addCart">add</button>
-    <button @click="update">update</button>
     <div v-for="shop in shoppings" :key="shop._id">
         <div class="card p-5 mb-3">
            <div class=" row g-0">
@@ -11,7 +9,7 @@
               <div class="col-md-8">
                  <h5 class="card-header">{{shop.name}}</h5>
                  <div class="text-end">
-                     <select class="p-2" v-model="select" @change="calPrice(shop.price)">
+                     <select class="p-2" v-model="select"  @click="calPrice(shop)">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -42,31 +40,34 @@ export default {
      }
  },
  computed:{
-     ...mapGetters(['shoppings','newPrice','res','token','userId'])
+     ...mapGetters(['shoppings','newPrice','res','token','userId','selected'])
  },
  methods:{
-     ...mapActions(['calculate','postCard','updateCart']),
-     calPrice(price){
-        let params={
+     ...mapActions(['calculate','postCart','updateCart']),
+     calPrice(shop){
+        
+            let params={
             select:parseInt(this.select),
-            price
+            price:shop.price
         }
+       
         this.calculate(params)
+     
     },
-    addCart(){
-       let payload={
-        _id:this.userId,
-        cart:this.shoppings
-       }
-       this.postCard(payload)
-    },
-    update(){
-      let payload={
-        _id:this.userId,
-        cart:this.shoppings
-       } 
-       this.updateCart(payload)
-    }
+   //  addCart(){
+   //     let payload={
+   //      _id:this.userId,
+   //      cart:this.shoppings
+   //     }
+   //     this.postCart(payload)
+   //  },
+   //  update(){
+   //    let payload={
+   //      _id:this.userId,
+   //      cart:this.shoppings
+   //     } 
+   //     this.updateCart(payload)
+   //  }
 
  }
 }

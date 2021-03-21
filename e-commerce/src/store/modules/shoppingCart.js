@@ -2,10 +2,13 @@ export default{
     state: {
         shoppings:[],
         newPrice:1,
+        selected:''
     },
     getters:{
         shoppings:state=>state.shoppings,
         newPrice:state=>state.newPrice,
+        selected:state=>state.selected,
+
     },
     mutations: {
         ADD_TO:(state,shop)=>{
@@ -13,7 +16,7 @@ export default{
         },
         CALCULATE:(state,params)=>{
            state.newPrice=params.select*params.price
-           console.log(state.newPrice)
+           state.selected=params.select
         }
     },
     actions: {
@@ -22,7 +25,7 @@ export default{
         },
         calculate:({commit},params)=>{
             commit('CALCULATE',params)
-        }
+        },
     }
     
   }

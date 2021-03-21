@@ -4,20 +4,8 @@ var ObjectId = require('mongodb').ObjectId;
 
 exports.saveProduct=(req,res)=>{
 
-//     Card.findOne({_id:req.body._id})
-//        .then(exists=>{
-//           if(exists){
-//               console.log(exists)
-//             res.sendStatus(400).json({
-//              statusCode:400,
-//              status:false,
-//             message:'A product alread exists update it instead'
-            
-          
-//         })
-//         return true
-//    }  
-// })
+ Card.findOne({_id:req.body._id})
+   
  const collection = new Card({
 
     _id:req.body._id,

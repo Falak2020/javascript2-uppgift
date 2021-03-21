@@ -77,7 +77,7 @@
           </a>
           <!-- Dropdown menu -->
           <ul  class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li  @click="logout()"><router-link to='/userLogin' >{{status}}</router-link></li>
+            <li  @click="logoutUser"><router-link to='/userLogin' >{{status}}</router-link></li>
           </ul>
         </li>
         
@@ -98,7 +98,7 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['token','status','shoppings']),
+    ...mapGetters(['token','status','shoppings','res','userId']),
     loginClasses(){
        if(this.token){
          return {
@@ -119,7 +119,27 @@ export default {
           if((this.status=='login')&&(this.token))
            this.status='logout'
         },
-       ...mapActions(['logout'])
+       ...mapActions(['logout','postCart','updateCart']),
+       logoutUser(){
+          
+         let payload={
+          _id:this.userId,
+          cart:this.shoppings
+       }
+       this.postCart(payload)
+           if(this.res){
+             console.log('Cart is add successfully')
+           }
+           else{
+             let payload={
+              _id:this.userId,
+              cart:this.shoppings
+          } 
+         this.updateCart(payload)
+      }
+      this.logout()    
+      }
+      
     }
     
 }

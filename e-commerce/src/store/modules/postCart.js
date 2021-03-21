@@ -1,7 +1,8 @@
 import axios from 'axios'
 export default {
     state: {
-      res:''
+      res:'',
+      
     },
     getters:{
       res:state=>state.res
@@ -9,13 +10,17 @@ export default {
     mutations: {
      SAVE:(state,res)=>{
        state.result=res
+       console.log('res'+state.result)
      },
      UPDATE:()=>{
 
-     }
+     },
+     ERROR:(err)=>{
+      console.log('errr'+err)
+    }
     },
     actions: {
-      postCard:({commit},payload)=>{
+      postCart:({commit},payload)=>{
         
        
        axios.post('http://localhost:9999/api/shoppings/add',{
@@ -25,6 +30,7 @@ export default {
        
        .then(res=>
         commit('SAVE',res.data))
+        .catch((err)=> commit('ERROR',err))
     },
     updateCart:({commit},payload)=>{
       let url='http://localhost:9999/api/shoppings/'+payload._id
