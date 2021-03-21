@@ -16,7 +16,8 @@ export default {
     },
     actions: {
       postCard:({commit},payload)=>{
-        console.log(payload._id)
+        
+       
        axios.post('http://localhost:9999/api/shoppings/add',{
          _id:payload._id,
          cartContents:payload.cart
@@ -26,12 +27,9 @@ export default {
         commit('SAVE',res.data))
     },
     updateCart:({commit},payload)=>{
-      let url='http://localhost:9999/api/shoppings/'+payload._id.toString()
-      let newCart={
-        _id:payload._id,
-        cartContents:payload.cart
-      }
-      console.log(newCart)
+      let url='http://localhost:9999/api/shoppings/'+payload._id
+      
+      
       console.log(url)
       fetch(url, {
         method: 'PUT',
@@ -40,7 +38,7 @@ export default {
           
         },
         body: JSON.stringify({
-        newCart,
+        cartContents:payload.cart,
     })
   })
   .then(res=>res.json())

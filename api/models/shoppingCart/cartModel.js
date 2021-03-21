@@ -1,5 +1,6 @@
 const mongoDb=require('mongoose')
 const Card=require('./cartSchema')
+var ObjectId = require('mongodb').ObjectId;
 
 exports.saveProduct=(req,res)=>{
 
@@ -20,7 +21,7 @@ exports.saveProduct=(req,res)=>{
  const collection = new Card({
 
     _id:req.body._id,
-    cartContents:req.body
+    cartContents:req.body.cartContents
    })
     collection.save()
     .then(()=>{
@@ -40,9 +41,11 @@ exports.saveProduct=(req,res)=>{
 }
 
 exports.updateCart = (req, res) => {
-    Card.updateOne( { _id: req.params._id }, {
-       _id:req.body._id,
-       cartContents:req.body.cart,
+  let id1= new ObjectId(req.params.id)
+  console.log(req.params.id)
+    Card.updateOne( { _id:req.params.id }, {
+       
+      cartContents:req.body.cartContents,
        modified: Date.now()
       })
       .then(() => {
