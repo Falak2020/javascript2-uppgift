@@ -5,18 +5,22 @@ export default ({
       token:'',
       error:'',
       status:'login',
-      username:''
+      username:'',
+      userId:''
     },
     getters:{
       token: state => state.token,
       error: state => state.error,
       status:state=> state.status,
-      username:state=>state.username
+      username:state=>state.username,
+      userId:state=>state.userId,
+
     },
     mutations: {
       GET_TOKEN(state,data) {
         state.token = data.token,
         state.username = data.username
+        state.userId = data.userId 
         state.status = 'logout'
         },
       GET_ERROR(state) {

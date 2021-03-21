@@ -1,6 +1,7 @@
 <template>
  <div class="container mt-5">
     <button @click="addCart">add</button>
+    <button @click="update">update</button>
     <div v-for="shop in shoppings" :key="shop._id">
         <div class="card p-5 mb-3">
            <div class=" row g-0">
@@ -41,10 +42,10 @@ export default {
      }
  },
  computed:{
-     ...mapGetters(['shoppings','newPrice','res','token'])
+     ...mapGetters(['shoppings','newPrice','res','token','userId'])
  },
  methods:{
-     ...mapActions(['calculate','postCard']),
+     ...mapActions(['calculate','postCard','updateCart']),
      calPrice(price){
         let params={
             select:parseInt(this.select),
@@ -54,10 +55,17 @@ export default {
     },
     addCart(){
        let payload={
-        _id:this.token,
+        _id:this.userId,
         cart:this.shoppings
        }
        this.postCard(payload)
+    },
+    update(){
+      let payload={
+        _id:this.userId,
+        cart:this.shoppings
+       } 
+       this.updateCart(payload)
     }
 
  }

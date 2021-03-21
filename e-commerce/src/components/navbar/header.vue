@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg" >
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg" >
     <div class="container-fluid">
        <a class="navbar-brand" href="#"></a>
        <button class="navbar-toggler" type="button"
@@ -16,11 +16,11 @@
             <router-link class="pos-r nav-link me-5 " aria-current="page" to='/shoppingCart'> 
                <i class=" fas fa-shopping-cart"></i>
                <span class="text-danger pos-a d-flex align-items-center justify-content-center"> {{shoppings.length}} </span>
-            </router-link>
+            </router-link> -->
             <!-- <router-link   class="nav-link" aria-current="page" to='/login'> 
                <i :class="loginClasses"  @mouseenter="toggle" @click="logout"></i> 
             </router-link> -->
-           <div class="dropdown nav-link" >
+           <!-- <div class="dropdown nav-link" >
             <i :class="loginClasses"  @mouseenter="toggle" 
             id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
             </i>
@@ -28,14 +28,65 @@
              <ul class="dropdown-menu " aria-labelledby="dropdownMenu2">
                 <li class="dropdown-item" @click="logout()" ><router-link to='/userLogin' >{{status}}</router-link></li>
             </ul>
-          </div> 
+          </div>  -->
         <!-- <router-link class="nav-link" :to="'/new/'+token "> new product</router-link>
         <router-link class="nav-link" aria-current="page" :to="{name:status}" >{{status}}</router-link> -->
-          </div>
+          <!-- </div>
       </div>
    </div>
   </nav> 
+   -->
+   <div>
+       <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg">
   
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Brand</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <router-link class="nav-link me-5 " aria-current="page" to='/'>  <i class="fas fa-home"></i><span class="ms-1">Home</span></router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="pos-r nav-link me-5 " aria-current="page" to='/shoppingCart'> 
+               <i class=" fas fa-shopping-cart"></i><span class="ms-1"> Shopping Cart</span>
+               <span class="text-danger pos-a d-flex align-items-center justify-content-center"> {{shoppings.length}} </span> 
+            </router-link>
+        </li>
+        <li class="nav-item dropdown nav-link" >
+          <a 
+            class="nav-link dropdown-toggle d-inline"
+            id="navbarDropdown"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          ><i :class="loginClasses"  @mouseenter="toggle"></i>
+           <span class="ms-1">User Acount</span> 
+          </a>
+          <!-- Dropdown menu -->
+          <ul  class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li  @click="logout()"><router-link to='/userLogin' >{{status}}</router-link></li>
+          </ul>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+   
+</div>
 </template>
 
 <script>
@@ -75,9 +126,7 @@ export default {
 </script>
 
 <style scoped>
- i{
-   font-size: 2rem;
- }
+
  li{
    font-size: 1rem;
  }
@@ -90,10 +139,6 @@ export default {
  .pos-r{
    position: relative;
  }
- span{
-   font-size: 1.3rem;
-   font-weight: bold;
-   
- }
+ 
 
 </style>

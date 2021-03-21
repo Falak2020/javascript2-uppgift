@@ -2,7 +2,7 @@
 
     <router-link  :to="{ path: '/details/'+product._id}" class="card hover-shadow text-color">
     
-        <img :src="product.image" class="card-img-top" alt="..." style="height:300px"/>
+        <img :src="product.image" class="card-img-top" alt="..." style="max-height:200px"/>
          <div class="card-body ">
                 <h5 class="card-title text-decoration-underline">{{product.name}}</h5>
                 <p class="card-text">
