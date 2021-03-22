@@ -38,9 +38,8 @@
    -->
 <div>
  <nav class="navbar navbar-expand-lg navbar-dark bg">
-  
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"> Pokemon</a>
+    <a class="navbar-brand logo ms-3" href="#"> Pokemon</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -60,7 +59,7 @@
         </li>
         <li class="nav-item">
           <router-link class=" nav-link me-5 " aria-current="page" to='/shoppingCart'> 
-               <i class=" fas fa-shopping-cart"> </i><span class="ms-1 pos-r"> Shopping Cart<span class="text-danger pos-a p-1">{{shoppings.length}} </span></span>
+               <i class=" fas fa-shopping-cart"> </i><span class="ms-1 pos-r"> Shopping Cart<span class="pos-a pt-1">{{shoppings.length}} </span></span>
            </router-link>
         </li>
         <li class="nav-item dropdown nav-link" >
@@ -76,15 +75,10 @@
           <!-- Dropdown menu -->
           <ul  class="dropdown-menu p-3 " aria-labelledby="navbarDropdown">
             <li  @click="logoutUser" class="text-center mb-2" ><router-link to='/userLogin' class="text-dark " >{{status}}</router-link></li>
-            <li  class="text-center"><router-link to='/userLogin' class="text-dark " >Sign up</router-link></li>
-          </ul>
-
-          
-          
-    
+            <li  class="text-center"><router-link to='/signup' class="text-dark " >Sign up</router-link></li>
+          </ul>   
         </li>
-        
-      </ul>
+       </ul>
     </div>
   </div>
 </nav>
@@ -159,5 +153,22 @@ export default {
    position: absolute;
    top:-15px;
  }
+.logo{
+  font-family:serif;
+  color: yellow;
+  font-size: 1.5rem;
+  
+
+}
+span span {
+    background-color: rgb(233, 13, 13);
+    width:30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    color: #ffffff;
+  }
+ 
+
 
 </style>

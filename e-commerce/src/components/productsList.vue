@@ -30,7 +30,6 @@ export default {
     ...mapActions(['addTo']),
      addToCart(){
       this.addTo(this.product)
-      console.log(this.shoppings)
     }
   }
 }

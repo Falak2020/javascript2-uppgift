@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Details from '../views/Details.vue'
 import login from '../views/userLogin.vue'
 import shoppingCart from '../views/shoppingCart.vue'
+import signup from '../views/signUp.vue'
 
 
 
@@ -19,6 +20,11 @@ const routes = [
     path: '/userLogin',
     name: 'login',
     component: login
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: signup
   },
   {
     path: '/shoppingCart',
