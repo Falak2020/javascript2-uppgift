@@ -1,6 +1,6 @@
 <template>
-  <div >
-    <Appheader /> 
+  <div class="mb-5" >
+    <Appheader/> 
   
     <router-view/>
   </div>

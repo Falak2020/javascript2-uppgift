@@ -1,59 +1,42 @@
 <template>
- <div class="container mt-5">
-    <div v-for="shop in shoppings" :key="shop._id">
-        <div class="card p-5 mb-3">
-           <div class=" row g-0">
-              <div class="col-md-4">
-                 <img :src="shop.image" alt="..." class="img-fluid"/>
-              </div>
-              <div class="col-md-8">
-                 <h5 class="card-header">{{shop.name}}</h5>
-                 <div class="text-end">
-                     <select class="p-2" v-model="select"  @click="calPrice(shop)">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                     </select>
-                 </div>
-                 
-                 <div class="card-body">
-                     <h5 class="card-title">{{shop.short}}</h5>
-                 </div> 
-                 <div v-if="!select"  class="text-end">{{shop.price}} kr</div>
-                 <div v-else class="text-end">{{newPrice}} kr</div>
-              </div>
-           </div> 
-        </div>
-    </div>
- </div>
+<div class="container">
+   <div v-if="shoppings.length>0">
+      <div v-for="shop in shoppings" :key="shop._id">
+          <cart-detail :shop="shop"/>
+      </div>
+   </div>
+   <div v-else class="card mt-5 p-4 text-center"> 
+      <div class="card-header text-info"><i class="fas fa-shopping-bag"></i></div>
+      <div class="card-body">
+        <p class="card-text">
+          Your Shopping Cart is empty - but it does not have to be
+       </p>
+    <router-link to='/' class="btn btn-primary">Continue Shopping</router-link>
+     </div>       
+   </div>
+    
+</div>
+ 
   
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import cartDetail from '../components/cartDetail.vue'
 export default {
- data(){
-     return{
-        select:'',
-     }
- },
+  components: { cartDetail },
+
  computed:{
-     ...mapGetters(['shoppings','newPrice','res','token','userId','selected'])
+     ...mapGetters(['shoppings','res','token','userId'])
  },
  methods:{
-     ...mapActions(['calculate','postCart','updateCart']),
-     calPrice(shop){
-        
-            let params={
-            select:parseInt(this.select),
-            price:shop.price
-        }
+     ...mapActions(['postCart','updateCart']),
+    
+         
        
-        this.calculate(params)
-     
     },
+    
+    
    //  addCart(){
    //     let payload={
    //      _id:this.userId,
@@ -69,10 +52,12 @@ export default {
    //     this.updateCart(payload)
    //  }
 
- }
+
 }
 </script>
 
-<style>
-
+<style scoped>
+  i{
+     font-size: 3rem;
+  }
 </style>

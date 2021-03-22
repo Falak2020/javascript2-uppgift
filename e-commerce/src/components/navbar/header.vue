@@ -36,12 +36,11 @@
    </div>
   </nav> 
    -->
-   <div>
-       <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg">
+<div>
+ <nav class="navbar navbar-expand-lg navbar-dark bg">
   
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Brand</a>
+    <a class="navbar-brand" href="#"> Pokemon</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -60,10 +59,9 @@
           <router-link class="nav-link me-5 " aria-current="page" to='/'>  <i class="fas fa-home"></i><span class="ms-1">Home</span></router-link>
         </li>
         <li class="nav-item">
-          <router-link class="pos-r nav-link me-5 " aria-current="page" to='/shoppingCart'> 
-               <i class=" fas fa-shopping-cart"></i><span class="ms-1"> Shopping Cart</span>
-               <span class="text-danger pos-a d-flex align-items-center justify-content-center"> {{shoppings.length}} </span> 
-            </router-link>
+          <router-link class=" nav-link me-5 " aria-current="page" to='/shoppingCart'> 
+               <i class=" fas fa-shopping-cart"> </i><span class="ms-1 pos-r"> Shopping Cart<span class="text-danger pos-a p-1">{{shoppings.length}} </span></span>
+           </router-link>
         </li>
         <li class="nav-item dropdown nav-link" >
           <a 
@@ -71,14 +69,19 @@
             id="navbarDropdown"
             role="button"
             data-mdb-toggle="dropdown"
-            aria-expanded="false"
-          ><i :class="loginClasses"  @mouseenter="toggle"></i>
-           <span class="ms-1">User Acount</span> 
-          </a>
+            aria-expanded="false">
+           <i :class="loginClasses"  @mouseenter="toggle"></i>
+              <span class="ms-1">User Acount</span> 
+           </a>
           <!-- Dropdown menu -->
-          <ul  class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li  @click="logoutUser"><router-link to='/userLogin' >{{status}}</router-link></li>
+          <ul  class="dropdown-menu p-3 " aria-labelledby="navbarDropdown">
+            <li  @click="logoutUser" class="text-center mb-2" ><router-link to='/userLogin' class="text-dark " >{{status}}</router-link></li>
+            <li  class="text-center"><router-link to='/userLogin' class="text-dark " >Sign up</router-link></li>
           </ul>
+
+          
+          
+    
         </li>
         
       </ul>
@@ -94,7 +97,6 @@ import{mapActions, mapGetters} from'vuex'
 export default {
   data(){
     return{
-      
     }
   },
   computed:{
@@ -150,15 +152,12 @@ export default {
  li{
    font-size: 1rem;
  }
- .pos-a{
-   position: absolute;
-   top:-10px;
-   right:0;
-   
- }
  .pos-r{
    position: relative;
  }
- 
+ .pos-a{
+   position: absolute;
+   top:-15px;
+ }
 
 </style>

@@ -1,31 +1,39 @@
 export default{
     state: {
         shoppings:[],
-        newPrice:1,
-        selected:''
+        newPrice:0,
+
+      
     },
     getters:{
         shoppings:state=>state.shoppings,
         newPrice:state=>state.newPrice,
-        selected:state=>state.selected,
+      
 
     },
     mutations: {
         ADD_TO:(state,shop)=>{
             state.shoppings.push(shop)
         },
-        CALCULATE:(state,params)=>{
-           state.newPrice=params.select*params.price
-           state.selected=params.select
+       
+     CHANGE:(state,newPrice)=>{
+            state.newPrice=newPrice
+        },
+        DELETE:(state,shop)=>{
+            state.shoppings=state.shoppings.filter(order=>order._id!=shop._id)
+            console.log(state.shoppings)
         }
     },
     actions: {
         addTo:({commit},shop)=>{
             commit('ADD_TO',shop)
         },
-        calculate:({commit},params)=>{
-            commit('CALCULATE',params)
+        change:({commit},newPrice)=>{
+            commit('CHANGE',newPrice)
         },
+        deleteOrder:({commit},shop)=>{
+            commit('DELETE',shop)
+        }
     }
     
   }
