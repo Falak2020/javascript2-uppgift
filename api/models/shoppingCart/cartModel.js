@@ -2,6 +2,15 @@ const mongoDb=require('mongoose')
 const Card=require('./cartSchema')
 var ObjectId = require('mongodb').ObjectId;
 
+
+exports.getone=(req,res)=>{
+  Card.findOne({_id:req.params.id})
+  .then(data=>res.status(200).json(data))
+  .catch(err=>res.status(500).json(err))
+}
+
+
+
 exports.saveProduct=(req,res)=>{
 
  Card.findOne({_id:req.body._id})

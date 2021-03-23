@@ -1,3 +1,4 @@
+import axios from 'axios'
 export default{
     state: {
         shoppings:[],  
@@ -35,6 +36,9 @@ export default{
         DELETE:(state,item)=>{
             state.shoppings=state.shoppings.filter(order=>order.shop._id!=item.shop._id)
             
+        },
+        USER_CART:(state,data)=>{
+            state.shoppings=data
         }
     },
     actions: {
@@ -44,7 +48,16 @@ export default{
        
         deleteOrder:({commit},item)=>{
             commit('DELETE',item)
-        }
+        },
+        getUserCart:({commit},id)=>{
+            console.log(id)
+            let url='http://localhost:9999/api/shoppings/'+id
+            console.log(url)
+            axios.get(url)
+            .then((res)=>{
+              commit('USER_CART',res.data.cartContents)
+            })
+          }
     }
     
   }

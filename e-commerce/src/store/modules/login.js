@@ -6,7 +6,7 @@ export default ({
       error:'',
       status:'login',
       username:'',
-      userId:''
+      userId:'',
     },
     getters:{
       token: state => state.token,
@@ -29,7 +29,7 @@ export default ({
       DELETE_TOKEN(state) {
         state.token='' ,
         state.status='login'
-      }
+      },
     },
     actions: {
       login({ commit },payload) {
@@ -39,13 +39,14 @@ export default ({
         })
         .then(response => {
           commit('GET_TOKEN', response.data)
+          
         })
         .catch(()=> commit('GET_ERROR'))
         },
       logout({commit}){
        commit('DELETE_TOKEN')
       },
-      
+
     }
    
   })

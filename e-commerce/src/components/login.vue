@@ -25,17 +25,30 @@ export default {
         }    
     },
     methods:{
-       ...mapActions(['login']),
+       ...mapActions(['login','getUserCart']),
        loginUser(){
         let payload = {
             email: this.email,
             password: this.password,
         }
         this.login(payload)
+        
+       },
+       getCard(){
+         console.log(this.token)
+           if(this.token.length>0){
+           let id=this.userId
+           console.log(id)
+           this.getUserCart(id)
+        }
        }
     },
     computed:{
-      ...mapGetters(['token','error','username'])
+      ...mapGetters(['token','error','username','userId']),
+
+    },
+    updated(){
+      this.getCard()
     }
 
 }

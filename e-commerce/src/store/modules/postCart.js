@@ -2,7 +2,7 @@ import axios from 'axios'
 export default {
     state: {
       res:'',
-      
+      userCart:[]
     },
     getters:{
       res:state=>state.res
@@ -17,12 +17,11 @@ export default {
      },
      ERROR:(err)=>{
       console.log('errr'+err)
-    }
+    },
+    
     },
     actions: {
       postCart:({commit},payload)=>{
-        
-       
        axios.post('http://localhost:9999/api/shoppings/add',{
          _id:payload._id,
          cartContents:payload.cart
@@ -34,8 +33,6 @@ export default {
     },
     updateCart:({commit},payload)=>{
       let url='http://localhost:9999/api/shoppings/'+payload._id
-      
-      
       console.log(url)
       fetch(url, {
         method: 'PUT',
@@ -49,10 +46,10 @@ export default {
   })
   .then(res=>res.json())
   .then(data=>{
-    console.log(data)
-    commit('UPDATE',data)})
   
-       
-    }
+    commit('UPDATE',data)})  
+  },
+
+  
   }
   }
