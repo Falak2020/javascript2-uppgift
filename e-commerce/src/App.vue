@@ -1,8 +1,9 @@
 <template>
   <div class="mb-5" >
     <Appheader/> 
-  
-    <router-view/>
+    <div class="container mt-3">
+       <router-view/>
+    </div> 
   </div>
 </template>
 <script>

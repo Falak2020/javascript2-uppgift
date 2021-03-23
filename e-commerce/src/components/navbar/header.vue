@@ -39,7 +39,7 @@
 <div>
  <nav class="navbar navbar-expand-lg navbar-dark bg">
   <div class="container-fluid">
-    <a class="navbar-brand logo ms-3" href="#"> Pokemon</a>
+    <a class="navbar-brand logo ms-3" href="#"><img src="../../assets/picatshu.png" alt=""> Pokemon.se</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -59,7 +59,7 @@
         </li>
         <li class="nav-item">
           <router-link class=" nav-link me-5 " aria-current="page" to='/shoppingCart'> 
-               <i class=" fas fa-shopping-cart"> </i><span class="ms-1 pos-r"> Shopping Cart<span class="pos-a pt-1">{{shoppings.length}} </span></span>
+               <i class=" fas fa-shopping-cart"> </i><span class="ms-1 pos-r"> Shopping Cart<span class="pos-a pt-1">{{cartNumber}} </span></span>
            </router-link>
         </li>
         <li class="nav-item dropdown nav-link" >
@@ -94,7 +94,7 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['token','status','shoppings','res','userId']),
+    ...mapGetters(['token','status','shoppings','res','userId','cartNumber']),
     loginClasses(){
        if(this.token){
          return {
@@ -168,7 +168,9 @@ span span {
     text-align: center;
     color: #ffffff;
   }
- 
+ img{
+   width:50px;  
+ }
 
 
 </style>

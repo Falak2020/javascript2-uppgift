@@ -1,40 +1,49 @@
 export default{
     state: {
-        shoppings:[],
-        newPrice:0,
-        newShoppings:[]
+        shoppings:[],  
     },
     getters:{
         shoppings:state=>state.shoppings,
         newPrice:state=>state.newPrice,
-        newShoppings:state=>state.newShoppings
-
+        newShoppings:state=>state.newShoppings,
+        cartNumber:state=>{
+          let counter=0
+           state.shoppings.forEach(element => {
+               counter+=element.quantity
+           });
+           return counter
+        },
+        totalPrice:state=>{
+            let total=0
+            state.shoppings.forEach(element=>{
+                total+=element.quantity*element.shop.price
+            })
+            return total
+        }
     },
     mutations: {
-        ADD_TO:(state,shop)=>{
-            state.shoppings.push(shop)
-
+        ADD_TO:(state,{shop,quantity})=>{
+            let exists=state.shoppings.find(item=>item.shop._id===shop._id)
+            if(exists){
+                exists.quantity+=1      
+            }
+            else{
+             state.shoppings.push({shop,quantity})
+            }
         },
        
-     CHANGE:(state,order)=>{
-             state.newShoppings=state.newShoppings.filter(shop=>shop._id!=order._id)
-             state.newShoppings.push(order)
-             state.newPrice=order.price
-        },
-        DELETE:(state,shop)=>{
-            state.shoppings=state.shoppings.filter(order=>order._id!=shop._id)
+        DELETE:(state,item)=>{
+            state.shoppings=state.shoppings.filter(order=>order.shop._id!=item.shop._id)
             
         }
     },
     actions: {
-        addTo:({commit},shop)=>{
-            commit('ADD_TO',shop)
+        addTo:({commit},{shop,quantity})=>{
+            commit('ADD_TO',{shop,quantity})
         },
-        change:({commit},order)=>{
-            commit('CHANGE',order)
-        },
-        deleteOrder:({commit},shop)=>{
-            commit('DELETE',shop)
+       
+        deleteOrder:({commit},item)=>{
+            commit('DELETE',item)
         }
     }
     

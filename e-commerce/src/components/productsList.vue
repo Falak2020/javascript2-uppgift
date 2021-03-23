@@ -1,21 +1,20 @@
 <template>
 
-   <div  class="card hover-shadow text-color">
-      <router-link  :to="{ path: '/details/'+product._id}">
-        <img :src="product.image" class="card-img-top" alt="..." style="height:350px"/>
-      </router-link>
+   <div  class="card hover-shadow">
+        <img :src="product.image" class="card-img-top img-fluid p-3" alt="..."   style="height:350px"/>
       <div class="card-body ">
-           <h5 class="card-title text-decoration-underline">{{product.name}}</h5>
+           <h5 class="card-title text-decoration-underline text-color">{{product.name}}</h5>
            <p class="card-text">
                {{product.price}} kr
            </p>
             <p class="card-text">
                {{product.short}}
             </p>
-            <div class="text-end ">
-                <button   @click="addToCart"><i class="fas fa-shopping-bag"></i></button>
+            <div class="text-end  d-flex justify-content-between">
+                <router-link  :to="{ path: '/details/'+product._id}">More Details</router-link>
+                <button   @click="addToCart"><i class="fas fa-shopping-bag"></i></button>    
             </div>
-           
+            
       </div>
     </div>
 </template>
@@ -23,13 +22,22 @@
 import { mapActions, mapGetters } from 'vuex'
 export default {
   props:['product'],
+  data(){
+    return{
+      quantity:1
+    }
+  },
   computed:{
     ...mapGetters(['shoppings'])
   },
   methods:{
     ...mapActions(['addTo']),
      addToCart(){
-      this.addTo(this.product)
+       let cart={
+         shop:this.product,
+         quantity:this.quantity
+       }
+      this.addTo(cart)
     }
   }
 }

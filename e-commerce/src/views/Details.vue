@@ -32,11 +32,19 @@
 import{mapGetters, mapActions} from 'vuex'
 export default {
  props:['id'],
-
+ data(){
+   return{
+     quantity:1
+   }
+ },
 methods:{
   ...mapActions(['getProduct','addTo']),
     addToCart(){
-      this.addTo(this.product)
+       let cart={
+         shop:this.product,
+         quantity:this.quantity
+       }
+      this.addTo(cart)
     }
 },
 computed:{
