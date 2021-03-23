@@ -59,7 +59,7 @@
         </li>
         <li class="nav-item">
           <router-link class=" nav-link me-5 " aria-current="page" to='/shoppingCart'> 
-               <i class=" fas fa-shopping-cart"> </i><span class="ms-1 pos-r"> Shopping Cart<span class="pos-a pt-1">{{cartNumber}} </span></span>
+               <i class=" fas fa-shopping-cart"> </i><span class="ms-1 pos-r"> Shopping Cart<span v-if="cartNumber" class="pos-a pt-1">{{cartNumber}} </span></span>
            </router-link>
         </li>
         <li class="nav-item dropdown nav-link" >
