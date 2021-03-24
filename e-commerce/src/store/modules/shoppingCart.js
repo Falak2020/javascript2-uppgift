@@ -1,11 +1,15 @@
 import axios from 'axios'
 export default{
     state: {
-        shoppings:[],  
+        shoppings:[],
+        res:'',
+        userCart:[]
+
     },
     getters:{
+
         shoppings:state=>state.shoppings,
-        newPrice:state=>state.newPrice,
+        res:state=>state.res,
         newShoppings:state=>state.newShoppings,
         cartNumber:state=>{
           let counter=0
@@ -37,10 +41,19 @@ export default{
             state.shoppings=state.shoppings.filter(order=>order.shop._id!=item.shop._id)
             
         },
+        
+        SAVE:(state,res)=>{
+            state.result=res
+        },
+
         USER_CART:(state,data)=>{
             state.shoppings=data
         },
 
+        
+        CLEAR:(state)=>{
+            state.shoppings=[]
+        }
 
     },
     actions: {
@@ -51,6 +64,32 @@ export default{
         deleteOrder:({commit},item)=>{
             commit('DELETE',item)
         },
+
+
+        postCart:({commit},payload)=>{
+            axios.post('http://localhost:9999/api/shoppings/add',{
+              _id:payload._id,
+              cartContents:payload.cart
+            })
+            
+            .then(res=>commit('SAVE',res.data))
+              .catch(()=>{
+               let url='http://localhost:9999/api/shoppings/'+payload._id
+                   console.log(url)
+                 fetch(url, {
+                     method: 'PUT',
+                     headers: {
+                       'Content-type': 'application/json; charset=UTF-8',   
+                     },
+                     body: JSON.stringify({
+                     cartContents:payload.cart,
+                 })
+               })
+               .then(res=>res.json())
+               .then(data=>commit('UPDATE',data))  
+             }) 
+           },
+ // Bring the users shopping cart from database 
         getUserCart:({commit},id)=>{
             console.log(id)
             let url='http://localhost:9999/api/shoppings/'+id
@@ -60,6 +99,10 @@ export default{
               commit('USER_CART',res.data.cartContents)
             })
           },
+ //Clear shopping cart when the user log out
+        clearUserCart({commit}){
+          commit('CLEAR')
+        }
        
     }
     

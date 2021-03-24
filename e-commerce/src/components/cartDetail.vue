@@ -17,7 +17,7 @@
                    <button class="btn btn-bg text-white" @click="add" >+</button>
                     <button class="btn btn-bg ms-2 text-white" @click="remove">-</button> 
                </div>
-              <div  class="text-end mt-5 d-flex justify-content-between"><strong>Quantity: {{item.quantity}}st </strong><strong>Price: {{item.quantity*myPrice}} kr</strong> </div> 
+              <div  class="text-end mt-5 d-flex justify-content-between"><strong>Quantity: {{item.quantity}}st </strong><strong>Price: {{item.quantity*item.shop.price}} kr</strong> </div> 
            </div> 
           <hr class="solid">
         </div>

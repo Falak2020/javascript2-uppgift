@@ -9,15 +9,17 @@
          </form>
     </div>
     <div v-else class="text-success text-center mt-5">
-       <h2>The authenticatin is successful</h2>
        <h3>Welcome {{username}}, have a nice time in our site</h3>
+       <home/>
     </div>
     <small class="text-danger">{{error}}</small>  
   </div> 
 </template>
 <script>
 import { mapActions, mapGetters} from 'vuex'
+import Home from '../views/Home.vue'
 export default {
+  components: { Home },
     data(){
         return{
             email:'',

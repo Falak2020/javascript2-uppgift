@@ -14,7 +14,7 @@ export default ({
           state.result=message
       },
       ERROR_USER:state=>{
-          state.errormsg='Fel to create the user'
+          state.errormsg='Fel to create the email is already registered try again'
           console.log(state.errormsg)
       },
       CLEAR_VALUE:state=>{

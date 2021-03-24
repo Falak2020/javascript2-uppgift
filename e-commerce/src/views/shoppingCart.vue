@@ -1,8 +1,8 @@
 <template>
-<div class="container mt-3">
+<div class="container mt-3"  >
    <div v-if="shoppings.length>0">
       <div v-for="item in shoppings" :key="item.shop._id">
-          <cart-detail :item="item"/>
+          <cart-detail :item="item" />
       </div>
       <div class="bg-white p-5 d-flex justify-content-around">Total:{{totalPrice}} <button class="btn bg text-white">Pay Now</button></div>
    </div>

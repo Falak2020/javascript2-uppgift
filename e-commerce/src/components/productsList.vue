@@ -11,7 +11,7 @@
                {{product.short}}
             </p>
             <div class="text-end  d-flex justify-content-between">
-                <router-link  :to="{ path: '/details/'+product._id}">More Details</router-link>
+                <router-link type='btn' class="btn btn-info" :to="{ path: '/productDetails/'+product._id}">More Details</router-link>
                 <button   @click="addToCart"><i class="fas fa-shopping-bag"></i></button>    
             </div>
             

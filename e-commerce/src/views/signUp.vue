@@ -3,8 +3,8 @@
      
   <div>
       <div  class="mt-5 container">
-       <button class="btn me-1" :class="loginClasses" @click="change('LogIn')">Login</button>
-       <button class="btn " :class="registerClasses" @click="change('register')">Register</button> 
+       <!-- <button class="btn me-1" :class="loginClasses" @click="change('LogIn')">Login</button>
+       <button class="btn " :class="registerClasses" @click="change('register')">Register</button>  -->
    </div>
   <component class="container " :is="comp" />
  </div>

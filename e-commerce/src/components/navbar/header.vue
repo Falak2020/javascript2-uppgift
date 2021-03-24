@@ -39,7 +39,7 @@
 <div>
  <nav class="navbar navbar-expand-lg navbar-dark bg">
   <div class="container-fluid">
-    <a class="navbar-brand logo ms-3" href="#"><img src="../../assets/picatshu.png" alt=""> Pokemon.se</a>
+    <a class="navbar-brand logo ms-3" href="#"><img src="../../assets/picatshu1.png" alt=""> Pokemon.se</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -115,24 +115,10 @@ export default {
           if((this.status=='login')&&(this.token))
            this.status='logout'
         },
-       ...mapActions(['logout','postCart','updateCart']),
+       ...mapActions(['logout','postCart','updateCart','clearUserCart']),
        logoutUser(){  
-      //    let payload={
-      //     _id:this.userId,
-      //     cart:this.shoppings
-      //  }
-      //  this.postCart(payload)
-      //      if(this.res){
-      //        console.log('Cart is add successfully')
-      //      }
-      //      else{
-      //        let payload={
-      //         _id:this.userId,
-      //         cart:this.shoppings
-      //     } 
-      //    this.updateCart(payload)
-      // }
-      this.logout()    
+         this.logout() 
+         this.clearUserCart()
       }
       
     }
