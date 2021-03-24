@@ -39,7 +39,9 @@ export default{
         },
         USER_CART:(state,data)=>{
             state.shoppings=data
-        }
+        },
+
+
     },
     actions: {
         addTo:({commit},{shop,quantity})=>{
@@ -57,7 +59,8 @@ export default{
             .then((res)=>{
               commit('USER_CART',res.data.cartContents)
             })
-          }
+          },
+       
     }
     
   }

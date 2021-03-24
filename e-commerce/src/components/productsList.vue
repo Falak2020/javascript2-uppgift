@@ -28,16 +28,36 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['shoppings'])
+    ...mapGetters(['shoppings','userId','res','shoppings'])
   },
   methods:{
-    ...mapActions(['addTo']),
+    ...mapActions(['addTo','postCart','updateCart']),
      addToCart(){
        let cart={
          shop:this.product,
          quantity:this.quantity
        }
       this.addTo(cart)
+      //Now add to database 
+      if(this.userId.length>0){
+       let payload={
+          _id:this.userId,
+          cart:this.shoppings
+       }
+      this.postCart(payload)
+      //      if(this.res){
+      //        console.log('Cart is add successfully')
+      //      }
+      //      else{
+      //        let payload={
+      //         _id:this.userId,
+      //         cart:this.shoppings 
+      //     } 
+      //   this.updateCart(payload)
+      // }
+       
+      
+      }
     }
   }
 }

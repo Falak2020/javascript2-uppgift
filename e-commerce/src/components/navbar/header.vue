@@ -116,23 +116,22 @@ export default {
            this.status='logout'
         },
        ...mapActions(['logout','postCart','updateCart']),
-       logoutUser(){
-          
-         let payload={
-          _id:this.userId,
-          cart:this.shoppings
-       }
-       this.postCart(payload)
-           if(this.res){
-             console.log('Cart is add successfully')
-           }
-           else{
-             let payload={
-              _id:this.userId,
-              cart:this.shoppings
-          } 
-         this.updateCart(payload)
-      }
+       logoutUser(){  
+      //    let payload={
+      //     _id:this.userId,
+      //     cart:this.shoppings
+      //  }
+      //  this.postCart(payload)
+      //      if(this.res){
+      //        console.log('Cart is add successfully')
+      //      }
+      //      else{
+      //        let payload={
+      //         _id:this.userId,
+      //         cart:this.shoppings
+      //     } 
+      //    this.updateCart(payload)
+      // }
       this.logout()    
       }
       

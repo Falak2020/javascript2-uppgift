@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Details from '../views/Details.vue'
+import Details from '../views/productDetails.vue'
 import login from '../views/userLogin.vue'
 import shoppingCart from '../views/shoppingCart.vue'
 import signup from '../views/signUp.vue'
@@ -33,7 +33,7 @@ const routes = [
   },
   
   {
-    path: '/Details/:id',
+    path: '/productDetails/:id',
     name: 'Details',
     component: Details,
     props:true

@@ -38,12 +38,30 @@ export default {
      }
  },
  computed:{
-     ...mapGetters(['newShoppings','shoppings'])
+     ...mapGetters(['shoppings','userId'])
  },
  methods:{
   add(){ 
      this.item.quantity+=1 
      this.myPrice=this.item.quantity*this.item.shop.price
+    if(this.userId.length>0){
+       let payload={
+          _id:this.userId,
+          cart:this.shoppings
+       }
+      this.postCart(payload)
+      //      if(this.res){
+      //        console.log('Cart is add successfully')
+      //      }
+      //      else{
+      //        let payload={
+      //         _id:this.userId,
+      //         cart:this.shoppings 
+      //     } 
+      //   this.updateCart(payload)
+      // }
+    }
+
   },
   remove(){
      this.item.quantity-=1 
@@ -51,9 +69,8 @@ export default {
         this.deleteOrder(this.item)
      }
      this.myPrice=this.item.quantity*this.item.shop.price
-
   },
-  ...mapActions(['deleteOrder']),
+  ...mapActions(['deleteOrder','postCart','updateCart']),
 
  }
 }
