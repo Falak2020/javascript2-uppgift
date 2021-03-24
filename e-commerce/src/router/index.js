@@ -5,6 +5,8 @@ import Details from '../views/productDetails.vue'
 import login from '../views/userLogin.vue'
 import shoppingCart from '../views/shoppingCart.vue'
 import signup from '../views/signUp.vue'
+import contactUs from '../views/contactUs.vue'
+
 
 
 
@@ -38,6 +40,14 @@ const routes = [
     component: Details,
     props:true
   },
+  {
+    path: '/contact-us',
+    name: 'contact-us',
+    component: contactUs
+  },
+
+
+
 ]
 
 const router = new VueRouter({

@@ -39,7 +39,7 @@
 <div>
  <nav class="navbar navbar-expand-lg navbar-dark bg">
   <div class="container-fluid">
-    <a class="navbar-brand logo ms-3" href="#"><img src="../../assets/picatshu1.png" alt=""> Pokemon.se</a>
+    <a class="navbar-brand logo" href="#"><img src="../../assets/picatshu1.png" alt=""> Pokemon.se</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -60,7 +60,7 @@
         <li class="nav-item">
           <router-link class=" nav-link me-5 " aria-current="page" to='/shoppingCart'> 
                <i class=" fas fa-shopping-cart"> </i><span class="ms-1 pos-r"> Shopping Cart<span v-if="cartNumber" class="pos-a pt-1">{{cartNumber}} </span></span>
-           </router-link>
+          </router-link>
         </li>
         <li class="nav-item dropdown nav-link" >
           <a 
@@ -78,8 +78,13 @@
             <li  class="text-center"><router-link to='/signup' class="text-dark " >Sign up</router-link></li>
           </ul>   
         </li>
+        <li>
+           <router-link class="nav-link me-5 " aria-current="page" to='/contact-us'><i class="far fa-address-book"></i><span class="ms-1">Contact Us</span></router-link>
+        </li>
        </ul>
+       
     </div>
+    
   </div>
 </nav>
    
