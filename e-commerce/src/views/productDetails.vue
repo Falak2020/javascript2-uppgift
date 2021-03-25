@@ -38,7 +38,7 @@ export default {
    }
  },
 methods:{
-  ...mapActions(['getProduct','addTo','updateCart','postCart']),
+  ...mapActions(['getProduct','addTo','updateOrder','postCart']),
     addToCart(){
        let cart={
          shop:this.product,
@@ -50,9 +50,15 @@ methods:{
       if(this.userId.length>0){
        let payload={
           _id:this.userId,
-          cart:this.shoppings
+          cart:this.shoppings,
+          token:this.token
        }
       this.postCart(payload)
+     
+      // if(this.statusCode==500)
+      // {
+      //     this.updateOrder(payload)
+      // }
       //      if(this.res){
       //        console.log('Cart is add successfully')
       //      }
@@ -67,7 +73,7 @@ methods:{
     }
 },
 computed:{
-  ...mapGetters(['product','userId','shoppings'])
+  ...mapGetters(['product','userId','shoppings','token','statusCode'])
 },
 created(){
   this.getProduct(this.id)

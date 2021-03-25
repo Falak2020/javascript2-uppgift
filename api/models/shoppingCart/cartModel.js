@@ -11,7 +11,7 @@ exports.getone=(req,res)=>{
 
 
 
-exports.saveProduct=(req,res)=>{
+exports.saveShoppings=(req,res)=>{
 
  Card.findOne({_id:req.body._id})
    

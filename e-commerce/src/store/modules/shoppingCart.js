@@ -2,14 +2,14 @@ import axios from 'axios'
 export default{
     state: {
         shoppings:[],
-        res:'',
+        statusCode:0,
         userCart:[]
 
     },
     getters:{
 
         shoppings:state=>state.shoppings,
-        res:state=>state.res,
+        statusCode:state=>state.statusCode,
         newShoppings:state=>state.newShoppings,
         cartNumber:state=>{
           let counter=0
@@ -43,7 +43,9 @@ export default{
         },
         
         SAVE:(state,res)=>{
-            state.result=res
+            console.log(res.statusCode)
+            state.statusCode=res.statusCode
+            console.log(state.statusCode)
         },
 
         USER_CART:(state,data)=>{
@@ -65,35 +67,57 @@ export default{
             commit('DELETE',item)
         },
 
-
         postCart:({commit},payload)=>{
-            axios.post('http://localhost:9999/api/shoppings/add',{
-              _id:payload._id,
-              cartContents:payload.cart
-            })
+                axios.post('http://localhost:9999/api/shoppings/add',{
+                  _id:payload._id,
+                  cartContents:payload.cart
+                },
+                {headers:{'Authorization': `Bearer ${payload.token}`}}
+                )
+                
+                .then(res=>commit('SAVE',res.data))
+                  .catch(()=>{
+                   let url='http://localhost:9999/api/shoppings/'+payload._id
+                       console.log(url)
+                     fetch(url, {
+                         method: 'PUT',
+                         headers: {
+                           'Content-type': 'application/json; charset=UTF-8', 
+                           'Authorization': `Bearer ${payload.token}`
+                         },
+                         body: JSON.stringify({
+                         cartContents:payload.cart,
+                     })
+                   })
+                   .then(res=>res.json())
+                   .then(data=>commit('UPDATE',data))  
+                 }) 
+               },
+           
+//update users shopping cart
+           updateOrder:({commit},payload)=>{
+
+              let url='http://localhost:9999/api/shoppings/'+payload._id
+           
+                fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                      'Content-type': 'application/json; charset=UTF-8', 
+                      'Authorization':`Bearer${payload.token}`
+                    },
+                    body: JSON.stringify({
+                    cartContents:payload.cart,
+                })
+              })
+              .then(res=>res.json())
+              .then(data=>commit('UPDATE',data))  
             
-            .then(res=>commit('SAVE',res.data))
-              .catch(()=>{
-               let url='http://localhost:9999/api/shoppings/'+payload._id
-                   console.log(url)
-                 fetch(url, {
-                     method: 'PUT',
-                     headers: {
-                       'Content-type': 'application/json; charset=UTF-8',   
-                     },
-                     body: JSON.stringify({
-                     cartContents:payload.cart,
-                 })
-               })
-               .then(res=>res.json())
-               .then(data=>commit('UPDATE',data))  
-             }) 
            },
  // Bring the users shopping cart from database 
         getUserCart:({commit},id)=>{
-            console.log(id)
+           
             let url='http://localhost:9999/api/shoppings/'+id
-            console.log(url)
+
             axios.get(url)
             .then((res)=>{
               commit('USER_CART',res.data.cartContents)

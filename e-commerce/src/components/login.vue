@@ -40,7 +40,6 @@ export default {
          console.log(this.token)
            if(this.token.length>0){
            let id=this.userId
-           console.log(id)
            this.getUserCart(id)
         }
        }

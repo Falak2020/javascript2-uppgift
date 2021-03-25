@@ -48,7 +48,7 @@ export default {
      }
  },
  computed:{
-     ...mapGetters(['shoppings','userId'])
+     ...mapGetters(['shoppings','userId','token'])
  },
  methods:{
 //   add(){ 
@@ -96,7 +96,8 @@ export default {
    if(this.userId.length>0){
        let payload={
           _id:this.userId,
-          cart:this.shoppings
+          cart:this.shoppings,
+          token:this.token
        }
       this.postCart(payload)
    }
