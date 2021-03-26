@@ -1,45 +1,9 @@
 <template>
-  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg" >
-    <div class="container-fluid">
-       <a class="navbar-brand" href="#"></a>
-       <button class="navbar-toggler" type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-       </button>
-       <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
-          <div class="navbar-nav ms-auto" >
-            <router-link class="nav-link me-5 " aria-current="page" to='/'>  <i class="fas fa-home"></i></router-link> 
-            <router-link class="pos-r nav-link me-5 " aria-current="page" to='/shoppingCart'> 
-               <i class=" fas fa-shopping-cart"></i>
-               <span class="text-danger pos-a d-flex align-items-center justify-content-center"> {{shoppings.length}} </span>
-            </router-link> -->
-            <!-- <router-link   class="nav-link" aria-current="page" to='/login'> 
-               <i :class="loginClasses"  @mouseenter="toggle" @click="logout"></i> 
-            </router-link> -->
-           <!-- <div class="dropdown nav-link" >
-            <i :class="loginClasses"  @mouseenter="toggle" 
-            id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false">
-            </i>
-            
-             <ul class="dropdown-menu " aria-labelledby="dropdownMenu2">
-                <li class="dropdown-item" @click="logout()" ><router-link to='/userLogin' >{{status}}</router-link></li>
-            </ul>
-          </div>  -->
-        <!-- <router-link class="nav-link" :to="'/new/'+token "> new product</router-link>
-        <router-link class="nav-link" aria-current="page" :to="{name:status}" >{{status}}</router-link> -->
-          <!-- </div>
-      </div>
-   </div>
-  </nav> 
-   -->
+
 <div>
  <nav class="navbar navbar-expand-lg navbar-dark bg">
   <div class="container-fluid">
-    <a class="navbar-brand logo" href="#"><img src="../../assets/picatshu1.png" alt=""> Pokemon.se</a>
+    <a class="navbar-brand logo" href="#"><img src="@/assets/picatshu1.png" alt="Pokemon"> Pokemon.se</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -47,11 +11,9 @@
       data-mdb-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+      aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -74,8 +36,8 @@
            </a>
           <!-- Dropdown menu -->
           <ul  class="dropdown-menu p-3 " aria-labelledby="navbarDropdown">
-            <li  @click="logoutUser" class="text-center mb-2" ><router-link to='/userLogin' class="text-dark " >{{status}}</router-link></li>
-            <li  class="text-center"><router-link to='/signup' class="text-dark " >Sign up</router-link></li>
+            <li  @click="logoutUser" class="text-center mb-2" ><router-link to='/login' class="text-dark " >{{status}}</router-link></li>
+            <li  class="text-center"><router-link to='/register' class="text-dark " >Sign up</router-link></li>
           </ul>   
         </li>
         <li>

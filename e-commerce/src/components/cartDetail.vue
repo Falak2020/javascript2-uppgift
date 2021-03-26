@@ -14,8 +14,6 @@
                     <!-- <button class="btn btn-bg ms-2 text-white" @click="remove">-</button>  -->
                    </div>
                 </div>
-                 
-                 
                  <div class="card-body">
                      <p class="card-title">{{item.shop.short}}</p>
                      <small><i class="fas fa-truck me-2"></i>Faster delivery</small>
@@ -27,9 +25,7 @@
                  <strong>Quantity: {{item.quantity}}st </strong>
                  <strong>Price: {{item.quantity*item.shop.price}} kr</strong> 
                  <p class="text-danger"><button class="border-0 bg-transparent text-danger" @click="Delete"><i class="fas fa-trash me-2 " ></i></button>Delete order</p>
-                 
               </div> 
-
            </div> 
           <hr class="solid">
         </div>
@@ -51,37 +47,9 @@ export default {
      ...mapGetters(['shoppings','userId','token'])
  },
  methods:{
-//   add(){ 
-//      this.item.quantity+=1 
-  
-//      this.myPrice=this.item.quantity*this.item.shop.price
-//     if(this.userId.length>0){
-//        let payload={
-//           _id:this.userId,
-//           cart:this.shoppings
-//        }
-//       this.postCart(payload)
-      //      if(this.res){
-      //        console.log('Cart is add successfully')
-      //      }
-      //      else{
-      //        let payload={
-      //         _id:this.userId,
-      //         cart:this.shoppings 
-      //     } 
-      //   this.updateCart(payload)
-      // }
-   //  }
 
-//   },
-//   remove(){
-//      this.item.quantity-=1 
-//      if(this.item.quantity==0){
-//         this.deleteOrder(this.item)
-//      }
-//      this.myPrice=this.item.quantity*this.item.shop.price
-//   },
   ...mapActions(['deleteOrder','postCart']),
+
  changeQTY(){
     if(this.qnt>this.item.quantity){
        this.item.quantity+=1 
@@ -102,8 +70,19 @@ export default {
       this.postCart(payload)
    }
  },
+
+
  Delete(){
        this.deleteOrder(this.item)
+
+       if(this.userId.length>0){
+       let payload={
+          _id:this.userId,
+          cart:this.shoppings,
+          token:this.token
+       }
+      this.postCart(payload)
+   }
   }
  }
 }

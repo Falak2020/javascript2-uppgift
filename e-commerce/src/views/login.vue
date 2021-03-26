@@ -17,11 +17,12 @@
 </template>
 <script>
 import { mapActions, mapGetters} from 'vuex'
-import Home from '../views/Home.vue'
+import Home from './Home.vue'
 export default {
   components: { Home },
     data(){
         return{
+        
             email:'',
             password:''
         }    
@@ -51,7 +52,6 @@ export default {
     updated(){
       this.getCard()
     }
-
 }
 </script>
 

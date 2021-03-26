@@ -54,21 +54,6 @@ methods:{
           token:this.token
        }
       this.postCart(payload)
-     
-      // if(this.statusCode==500)
-      // {
-      //     this.updateOrder(payload)
-      // }
-      //      if(this.res){
-      //        console.log('Cart is add successfully')
-      //      }
-      //      else{
-      //        let payload={
-      //         _id:this.userId,
-      //         cart:this.shoppings 
-      //     } 
-      //   this.updateCart(payload)
-      // }
     }
     }
 },

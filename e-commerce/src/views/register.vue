@@ -36,8 +36,12 @@ export default {
 
 ...mapActions(['registerUser','clearValue']),
    newUser(){
+     if(this.user.firstName!=''&&this.user.lastName!=''&&this.user.email!=''&&this.user.password!='')
      this.registerUser(this.user)
-     this.user=''
+     this.user.firstName='',
+     this.user.lastName='',
+     this.user.email='',
+     this.user.password=''
    }
   },
   destroyed(){

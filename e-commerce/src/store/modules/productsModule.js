@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '@/axios'
 
 export default ({
     state: {
@@ -15,7 +15,7 @@ export default ({
     },
     actions: {
       getProducts({ commit }) {
-        axios.get('http://localhost:9999/api/products')
+        axios.get('/products')
         .then(response => {
           commit('GET_PRODUCTS', response.data)
         })

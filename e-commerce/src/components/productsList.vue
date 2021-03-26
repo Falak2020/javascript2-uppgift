@@ -1,7 +1,7 @@
 <template>
 
-   <div  class="card hover-shadow">
-        <img :src="product.image" class="card-img-top img-fluid p-3" alt="..."   style="height:350px"/>
+   <div  class="card hover-shadow h-100  p-3">
+        <img :src="product.image" class="card-img-top img-fluid "/>
       <div class="card-body ">
            <h5 class="card-title text-decoration-underline text-color">{{product.name}}</h5>
            <p class="card-text">
@@ -9,12 +9,11 @@
            </p>
             <p class="card-text">
                {{product.short}}
-            </p>
-            <div class="text-end  d-flex justify-content-between">
+            </p>     
+      </div>
+       <div class="text-end  d-flex justify-content-between">
                 <router-link type='btn' class="btn btn-info" :to="{ path: '/productDetails/'+product._id}">More Details</router-link>
                 <button   @click="addToCart"><i class="fas fa-shopping-bag"></i></button>    
-            </div>
-            
       </div>
     </div>
 </template>
@@ -75,6 +74,9 @@ export default {
  button{
    background: transparent;
    border: none;
+ }
+ img{
+   height: 350px;
  }
  
 </style>

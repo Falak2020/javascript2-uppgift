@@ -55,18 +55,22 @@ export default{
         
         CLEAR:(state)=>{
             state.shoppings=[]
-        }
+        },
 
     },
+    ////////////////////////////////////////////////
     actions: {
+      // add order to the shopping cart
         addTo:({commit},{shop,quantity})=>{
             commit('ADD_TO',{shop,quantity})
-        },
-       
+          },
+          
+      // delete order from shopping cart
         deleteOrder:({commit},item)=>{
             commit('DELETE',item)
         },
 
+      //send shopping cart to database
         postCart:({commit},payload)=>{
                 axios.post('http://localhost:9999/api/shoppings/add',{
                   _id:payload._id,
@@ -78,41 +82,28 @@ export default{
                 .then(res=>commit('SAVE',res.data))
                   .catch(()=>{
                    let url='http://localhost:9999/api/shoppings/'+payload._id
-                       console.log(url)
-                     fetch(url, {
-                         method: 'PUT',
-                         headers: {
-                           'Content-type': 'application/json; charset=UTF-8', 
-                           'Authorization': `Bearer ${payload.token}`
-                         },
-                         body: JSON.stringify({
-                         cartContents:payload.cart,
-                     })
-                   })
-                   .then(res=>res.json())
-                   .then(data=>commit('UPDATE',data))  
+                       axios.put(url,
+                        {cartContents:payload.cart},
+                        {headers:{'Authorization': `Bearer ${payload.token}`}}
+                        
+                        )
+                        .then(res=>console.log(res))
+                  //    fetch(url, {
+                  //        method: 'PUT',
+                  //        headers: {
+                  //          'Content-type': 'application/json; charset=UTF-8', 
+                  //          'Authorization': `Bearer ${payload.token}`
+                  //        },
+                  //        body: JSON.stringify({
+                  //        cartContents:payload.cart,
+                  //    })
+                  //  })
+                  //  .then(res=>res.json())
+                  //  .then(data=>commit('UPDATE',data))  
                  }) 
                },
            
-//update users shopping cart
-           updateOrder:({commit},payload)=>{
 
-              let url='http://localhost:9999/api/shoppings/'+payload._id
-           
-                fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                      'Content-type': 'application/json; charset=UTF-8', 
-                      'Authorization':`Bearer${payload.token}`
-                    },
-                    body: JSON.stringify({
-                    cartContents:payload.cart,
-                })
-              })
-              .then(res=>res.json())
-              .then(data=>commit('UPDATE',data))  
-            
-           },
  // Bring the users shopping cart from database 
         getUserCart:({commit},id)=>{
            
@@ -126,7 +117,8 @@ export default{
  //Clear shopping cart when the user log out
         clearUserCart({commit}){
           commit('CLEAR')
-        }
+        },
+
        
     }
     

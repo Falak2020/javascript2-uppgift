@@ -10,24 +10,6 @@ exports.getone=(req,res)=>{
     Product.findOne({_id:req.params.id})
     .then(data=>res.status(200).json(data))
     .catch(err=>res.status(500).json(err))
-    // Product.exists({_id:req.params.is},(err,result)=>{
-    //   if(err){
-    //     res.status(400).json(err)
-    //   }
-    //   else{
-    //     if(result){
-    //       Product.findOne({_id:req.params.id})
-    //       .then(data=>res.status(200).json(data))
-    //     }
-    //     else{
-    //      return  res.status(400).json({
-    //         statusCode:400,
-    //         status:false,
-    //         message:'not found'
-    //       })
-    //     }
-    //   }
-    // })
 }
 
 exports.createP=(req,res)=>{
@@ -37,7 +19,7 @@ exports.createP=(req,res)=>{
         res.sendStatus(400).json({
             statusCode:400,
             status:false,
-            message:'A product alread exists update it instead'
+            message:'A product is already exists update it instead'
         })
    }
 
@@ -70,28 +52,6 @@ exports.createP=(req,res)=>{
 }
 
 exports.updateProduct = (req, res) => {
-    // Product.updateOne( { _id: req.params.id }, req.body )
-  
-    //   .then(() => {
-    //     Product.updateOne( { _id: req.params.id }, {
-    //       $set: { modified: Date.now() }
-    //     })
-  
-    //     .then(() => {
-    //       res.status(200).json({
-    //         statusCode: 200,
-    //         status: true,
-    //         message: 'Product updated'
-    //       })
-    //     })
-    //   })
-    //   .catch(() => {
-    //     res.status(500).json({
-    //       statusCode: 500,
-    //       status: false,
-    //       message: 'Failed to update product'
-    //     })
-    //   })
   
     Product.updateOne( { _id: req.params.id }, {
       ...req.body,
