@@ -46,7 +46,27 @@ export default {
       },
       DELETE_TOKEN(state) {
         state.token='' ,
-        state.status='login'
+        state.status='login' 
+        localStorage.removeItem('token')
+        localStorage.removeItem('userId')
+      },
+
+      CHECK_USER:state=>{
+        try{
+          let token=localStorage.getItem('token')
+          let id = localStorage.getItem('userId')
+          if(token){
+             state.token=token,
+             state.userId=id
+             state.status='logout'
+         }
+        else{
+             state.token='',
+             state.userId=''
+             state.status='login'
+        }
+        }
+        catch{(err)=>console.log(err)}
       }
     },
     actions: {
@@ -77,7 +97,9 @@ export default {
     login({ commit },payload) {
            axios.post('/users/login', payload)
         .then(response => {
-          commit('GET_TOKEN', response.data)
+          localStorage.setItem('token',response.data.token)
+          localStorage.setItem('userId',response.data.userId)
+          commit('GET_TOKEN',response.data)
           
         })
         .catch(()=> commit('GET_ERROR'))
@@ -87,6 +109,10 @@ export default {
     logout({commit}){
        commit('DELETE_TOKEN')
     },
+
+    checkUser({commit}){
+      commit('CHECK_USER')
+    }
 
     }
    

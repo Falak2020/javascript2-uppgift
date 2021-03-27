@@ -8,11 +8,23 @@
 </template>
 <script>
 import Appheader from'./components/navbar/header'
-
+import {mapActions, mapGetters} from 'vuex'
 export default {
    components:{
      Appheader
-   }
+   },
+   computed:{
+     ...mapGetters(['userId'])
+   },
+   methods:{
+     ...mapActions(['checkUser','getUserCart']),
+   },
+
+   created(){
+     this.checkUser()
+     this.getUserCart(this.userId)
+   },
+   
  }
 </script>
 

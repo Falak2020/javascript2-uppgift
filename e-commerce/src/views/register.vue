@@ -1,13 +1,25 @@
 <template>
-  <div class="container border bg-light" >
-      <div  ref="form" class="text-center  mt-5" >
-            <form class="container mt-3  p-3"  @submit.prevent="newUser" >
+  <div class="container border bg-light mt-5" >
+      <div  ref="form" class="text-center p-5 " >
+            <form class="container mt-3 "  @submit.prevent="newUser" >
               <p class="h2">Are you a new customer?</p>
               <p class="h4 mb-4">Register you now </p>
-               <input type="text" v-model="user.firstName" class="mt-3 form-control" placeholder="Enter your firstname">
-               <input type="text" v-model="user.lastName" class="mt-3 form-control" placeholder="Enter your lastname">
-               <input type="text" v-model="user.email" class="mt-3 form-control" placeholder="Enter your email">
-               <input type="password" v-model="user.password" class="mt-3 form-control" placeholder="Enter your password">
+              <div class="form-outline">
+                  <input type="text" id="firstname" class="form-control mb-3 border" v-model="user.firstName" />
+                  <label class="form-label" for="firstname">First name</label>
+              </div>
+              <div class="form-outline">
+                   <input type="text" id="lastname" class="form-control border mb-3" v-model="user.lastName"/>
+                   <label class="form-label" for="lastname">Last name</label>
+              </div>
+              <div class="form-outline mb-4">
+                  <input type="email" id="email" class="form-control border mb-3" v-model="user.email" />
+                  <label class="form-label" for="email">Email address</label>
+              </div>
+              <div class="form-outline mb-4">
+                  <input type="password" id="password" class="form-control border" v-model="user.password" />
+                  <label class="form-label" for="password">Password</label>
+              </div>
                <button  type="submit" class="btn btn-info form-control mt-5 text-white text-uppercase">register</button>
            </form>
        </div>

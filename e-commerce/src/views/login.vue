@@ -1,11 +1,21 @@
 <template>
   <div class="container">
-    <div v-if="!token" class="border p-5 bg-light">
+    
+    <div v-if="!token" class="border p-5 bg-white mt-5">
       <h5 class="mb-3">Welcome to our e-commerce website, please enter your user information</h5>
           <form class=" p-3"  @submit.prevent="loginUser" >
-            <input type="text"  v-model="email" class="mt-3 form-control" placeholder="Enter your email">
-            <input type="password"  v-model="password" class="mt-3 form-control" placeholder="Enter your password">
+             <div class="form-outline mb-4">
+               <input type="email" id="email" class="form-control border-bottom mb-3" v-model="email" />
+               <label class="form-label" for="email">Email Address</label>
+              </div>
+            <div class="form-outline mb-4">
+               <input type="password" id="password" class="form-control border-bottom" v-model="password" />
+               <label class="form-label" for="password">Password</label>
+            </div>
             <button  type="submit" class="btn btn-info form-control mt-5 text-white text-uppercase mb-3">Log in</button>    
+            <div class="text-center mt-2">
+               <p>Not a member? <router-link to="/register">Register</router-link></p>
+            </div>
          </form>
     </div>
     <div v-else class="text-success text-center mt-5">
