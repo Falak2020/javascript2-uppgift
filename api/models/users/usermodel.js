@@ -35,7 +35,8 @@ exports.registerUser = (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            passwordHash: hash
+            passwordHash: hash,
+            role:req.body.role
           })
           newUser.save()
             .then(() => {
@@ -86,7 +87,8 @@ exports.login = (req, res) => {
                 message: 'correct email ',
                 token: auth.generateToken(user),
                 username:user.firstName,
-                userId:user._id
+                userId:user._id,
+                role:user.role
               })
 
             }

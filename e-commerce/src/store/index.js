@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import productsModule from './modules/productsModule'
 import getOneProduct from './modules/getOneProduct'
-import login from './modules/login'
+import user from './modules/user'
 import shoppingCart from './modules/shoppingCart'
 
 
@@ -18,7 +18,7 @@ export default new Vuex.Store({
   modules: {
     productsModule,
     getOneProduct,
-    login,
+    user,
     shoppingCart,
     
   }

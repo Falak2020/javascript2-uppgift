@@ -38,6 +38,9 @@
           <ul  class="dropdown-menu p-3 " aria-labelledby="navbarDropdown">
             <li  @click="logoutUser" class="text-center mb-2" ><router-link to='/login' class="text-dark " >{{status}}</router-link></li>
             <li  class="text-center"><router-link to='/register' class="text-dark " >Sign up</router-link></li>
+            <li v-if="status=='Logout'"><hr class="dropdown-divider" /></li>
+            <li  class="text-center mt-3" v-if="status=='Logout'"><router-link to='/userSetting' class="text-dark" ><i class="fas fa-cogs me-2"></i>Settings</router-link></li>
+            <li  class="text-center mt-2" v-if="role=='admin'"><router-link to='/newProduct' class="text-dark" >Add Product</router-link></li>
           </ul>   
         </li>
         <li>
@@ -61,7 +64,7 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['token','status','shoppings','res','userId','cartNumber']),
+    ...mapGetters(['token','status','shoppings','res','userId','cartNumber','role']),
     loginClasses(){
        if(this.token){
          return {

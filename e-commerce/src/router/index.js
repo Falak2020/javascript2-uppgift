@@ -6,6 +6,8 @@ import login from '../views/login.vue'
 import shoppingCart from '../views/shoppingCart.vue'
 import signup from '../views/register.vue'
 import contactUs from '../views/contactUs.vue'
+import settings from '../views/userSettings'
+import newProduct from '../views/newProduct'
 
 
 
@@ -29,6 +31,11 @@ const routes = [
     component: signup
   },
   {
+    path: '/userSettings',
+    name: 'settings',
+    component: settings
+  },
+  {
     path: '/shoppingCart',
     name: 'shoppingCart',
     component: shoppingCart
@@ -45,7 +52,11 @@ const routes = [
     name: 'contact-us',
     component: contactUs
   },
-
+  {
+    path: '/newProduct',
+    name: 'newProduct',
+    component: newProduct
+  },
 
 
 ]

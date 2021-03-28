@@ -4,21 +4,16 @@
             <form class="container mt-3 "  @submit.prevent="newUser" >
               <p class="h2">Are you a new customer?</p>
               <p class="h4 mb-4">Register you now </p>
-              <div class="form-outline">
-                  <input type="text" id="firstname" class="form-control mb-3 border" v-model="user.firstName" />
-                  <label class="form-label" for="firstname">First name</label>
-              </div>
-              <div class="form-outline">
-                   <input type="text" id="lastname" class="form-control border mb-3" v-model="user.lastName"/>
-                   <label class="form-label" for="lastname">Last name</label>
-              </div>
-              <div class="form-outline mb-4">
-                  <input type="email" id="email" class="form-control border mb-3" v-model="user.email" />
-                  <label class="form-label" for="email">Email address</label>
-              </div>
-              <div class="form-outline mb-4">
-                  <input type="password" id="password" class="form-control border" v-model="user.password" />
-                  <label class="form-label" for="password">Password</label>
+              <input type="text" id="firstname" class="form-control mb-3 border" v-model="user.firstName" placeholder="First Name" />
+              <input type="text" id="lastname" class="form-control border mb-3" v-model="user.lastName" placeholder="Last Name"/>
+              <input type="email" id="email" class="form-control border mb-3" v-model="user.email" placeholder="Email" />
+              <input type="password" id="password" class="form-control border" v-model="user.password" placeholder="Password"/>    
+              <div class="mt-3">
+                <select class="form-control" v-model="user.role"> 
+                  <option value="role">Select Role</option>
+                  <option value="user">user</option>
+                  <option value="admin">admin</option>
+                </select>
               </div>
                <button  type="submit" class="btn btn-info form-control mt-5 text-white text-uppercase">register</button>
            </form>
@@ -37,7 +32,8 @@ export default {
         firstName:'',
         lastName:'',
         email:'',
-        password:''
+        password:'',
+        role:'role'
       }
     }
   },

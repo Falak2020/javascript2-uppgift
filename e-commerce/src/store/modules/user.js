@@ -1,14 +1,15 @@
 import axios from '@/axios'
-
+import router from '@/router'
 export default {
     state: {
       token:'',
       error:'',
-      status:'login',
+      status:'Login',
       username:'',
       userId:'',
       result:'',
-      errormsg:''
+      errormsg:'',
+      role:''
     },
     getters:{
       token: state => state.token,
@@ -17,8 +18,8 @@ export default {
       username:state=>state.username,
       userId:state=>state.userId,
       result:state=>state.result,
-      errormsg:state=>state.errormsg
-
+      errormsg:state=>state.errormsg,
+      role: state=> state.role
     },
     mutations: {
       RESULT_TRUE:(state)=>{
@@ -39,31 +40,37 @@ export default {
         state.token = data.token,
         state.username = data.username
         state.userId = data.userId 
-        state.status = 'logout'
+        state.role = data.role
+        state.status = 'Logout'
       },
       GET_ERROR(state) {
         state.error = 'Incorrect email or password'
       },
       DELETE_TOKEN(state) {
         state.token='' ,
-        state.status='login' 
-        localStorage.removeItem('token')
-        localStorage.removeItem('userId')
+        state.status='Login' 
+        localStorage.removeItem('data')
       },
 
       CHECK_USER:state=>{
         try{
-          let token=localStorage.getItem('token')
-          let id = localStorage.getItem('userId')
+         
+          let data = JSON.parse(localStorage.getItem("data"))
+        
+          // let token=localStorage.getItem('token')
+          // let id = localStorage.getItem('userId')
+          let token=data.token
+          let id = data.userId
           if(token){
              state.token=token,
              state.userId=id
-             state.status='logout'
+             state.role = data.role
+             state.status='Logout'
          }
         else{
              state.token='',
              state.userId=''
-             state.status='login'
+             state.status='Login'
         }
         }
         catch{(err)=>console.log(err)}
@@ -72,6 +79,7 @@ export default {
     actions: {
 
     registerUser:async({dispatch,commit},user)=>{
+      console.log(user.role)
       const payload = {
         email: user.email,
         password: user.password
@@ -80,8 +88,11 @@ export default {
         const res =   await axios.post('/users/register',user)
         dispatch('login', payload)
         console.log(res)
-        if(res.status==201)
-         commit('RESULT_TRUE')
+        if(res.status==201){
+           commit('RESULT_TRUE')
+           router.push('/')
+        }
+        
       }
       catch{
         commit('ERROR_USER')
@@ -97,8 +108,9 @@ export default {
     login({ commit },payload) {
            axios.post('/users/login', payload)
         .then(response => {
-          localStorage.setItem('token',response.data.token)
-          localStorage.setItem('userId',response.data.userId)
+          // localStorage.setItem('token',response.data.token)
+          // localStorage.setItem('userId',response.data.userId)
+          localStorage.setItem("data", JSON.stringify(response.data))
           commit('GET_TOKEN',response.data)
           
         })

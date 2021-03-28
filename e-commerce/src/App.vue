@@ -14,7 +14,7 @@ export default {
      Appheader
    },
    computed:{
-     ...mapGetters(['userId'])
+     ...mapGetters(['userId','token'])
    },
    methods:{
      ...mapActions(['checkUser','getUserCart']),
@@ -22,6 +22,7 @@ export default {
 
    created(){
      this.checkUser()
+     if(this.token)
      this.getUserCart(this.userId)
    },
    
