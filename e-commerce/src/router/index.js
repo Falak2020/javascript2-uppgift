@@ -33,7 +33,8 @@ const routes = [
   {
     path: '/userSettings',
     name: 'settings',
-    component: settings
+    component: settings,
+    meta: { authorize: true }
   },
   {
     path: '/shoppingCart',
@@ -66,5 +67,21 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  const { authorize } = to.meta
+  let data = JSON.parse(localStorage.getItem("data"))
+  
+  if(authorize) {
+    if(!data) {
+      next({path: '/login', query: { redirect: to.fullPath }})
+    } else {
+      next()
+    }
+
+  }
+  next()
+})
+
 
 export default router

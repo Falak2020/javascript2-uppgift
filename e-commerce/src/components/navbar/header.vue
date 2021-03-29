@@ -4,6 +4,7 @@
  <nav class="navbar navbar-expand-lg navbar-dark bg">
   <div class="container-fluid">
     <a class="navbar-brand logo" href="#"><img src="@/assets/picatshu1.png" alt="Pokemon"> Pokemon.se</a>
+    
     <button
       class="navbar-toggler"
       type="button"
@@ -36,33 +37,30 @@
            </a>
           <!-- Dropdown menu -->
           <ul  class="dropdown-menu p-3 " aria-labelledby="navbarDropdown">
-            <li  @click="logoutUser" class="text-center mb-2" ><router-link to='/login' class="text-dark " >{{status}}</router-link></li>
-            <li  class="text-center"><router-link to='/register' class="text-dark " >Sign up</router-link></li>
+            <li  @click="logoutUser" class="text-center drophover  mb-2" ><router-link to='/login' class="text-dark item " >{{status}}</router-link></li>
+            <li  class="text-center drophover"><router-link to='/register' class="text-dark " >Sign up</router-link></li>
             <li v-if="status=='Logout'"><hr class="dropdown-divider" /></li>
-            <li  class="text-center mt-3" v-if="status=='Logout'"><router-link to='/userSetting' class="text-dark" ><i class="fas fa-cogs me-2"></i>Settings</router-link></li>
-            <li  class="text-center mt-2" v-if="role=='admin'"><router-link to='/newProduct' class="text-dark" >Add Product</router-link></li>
+            <li  class="text-center mt-3 drophover" v-if="status=='Logout'"><router-link to='/userSetting' class="text-dark" ><i class="fas fa-cogs me-2"></i>Settings</router-link></li>
+            <li  class="text-center mt-2 drophover" v-if="role=='admin'"><router-link to='/newProduct' class="text-dark" >Add Product</router-link></li>
           </ul>   
         </li>
         <li>
            <router-link class="nav-link me-5 " aria-current="page" to='/contact-us'><i class="far fa-address-book"></i><span class="ms-1">Contact Us</span></router-link>
         </li>
-       </ul>
-       
+       </ul>   
     </div>
-    
   </div>
 </nav>
-   
+
+
+
 </div>
 </template>
 
 <script>
 import{mapActions, mapGetters} from'vuex'
 export default {
-  data(){
-    return{
-    }
-  },
+  
   computed:{
     ...mapGetters(['token','status','shoppings','res','userId','cartNumber','role']),
     loginClasses(){
@@ -91,7 +89,8 @@ export default {
          this.clearUserCart()
       }
       
-    }
+    },
+  
     
 }
 </script>
@@ -101,6 +100,12 @@ export default {
  li{
    font-size: 1rem;
  }
+ 
+ .drophover:hover{
+   background-color: rgb(58, 98, 173);
+   color: #ffffff;
+ }
+
  .pos-r{
    position: relative;
  }

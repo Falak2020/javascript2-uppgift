@@ -37,6 +37,7 @@ export default {
         state.errormsg=''
       },
       GET_TOKEN(state,data) {
+        state.error=''
         state.token = data.token,
         state.username = data.username
         state.userId = data.userId 
@@ -48,7 +49,8 @@ export default {
       },
       DELETE_TOKEN(state) {
         state.token='' ,
-        state.status='Login' 
+        state.status='Login',
+        state.role='user'
         localStorage.removeItem('data')
       },
 
@@ -56,9 +58,7 @@ export default {
         try{
          
           let data = JSON.parse(localStorage.getItem("data"))
-        
-          // let token=localStorage.getItem('token')
-          // let id = localStorage.getItem('userId')
+
           let token=data.token
           let id = data.userId
           if(token){
@@ -71,6 +71,7 @@ export default {
              state.token='',
              state.userId=''
              state.status='Login'
+             state.role='user'
         }
         }
         catch{(err)=>console.log(err)}
@@ -106,13 +107,20 @@ export default {
     },
      
     login({ commit },payload) {
-           axios.post('/users/login', payload)
+           axios.post('/users/login', payload.user)
         .then(response => {
-          // localStorage.setItem('token',response.data.token)
-          // localStorage.setItem('userId',response.data.userId)
+         
           localStorage.setItem("data", JSON.stringify(response.data))
           commit('GET_TOKEN',response.data)
           
+          if(payload.route) {
+            router.push(payload.route)
+          } else {
+            router.push('/')
+          }
+
+          // setTimeout(function(){ router.push('/') }, 2000);
+         
         })
         .catch(()=> commit('GET_ERROR'))
       },

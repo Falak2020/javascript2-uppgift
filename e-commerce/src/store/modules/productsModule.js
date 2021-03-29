@@ -3,19 +3,29 @@ import axios from '@/axios'
 export default {
     state: {
       products:[],
+      product:null,
       res:'',
-      err:''
+      err:'',
+      searchVal:''
     },
     getters:{
       products: state => state.products,
       res: state => state.res,
-      err:state=> state.err
+      err:state=> state.err,
+      product: state => state.product,
+      filteredProducts: state => {
+        return state.products.filter(product => product.name.toLowerCase().match(state.searchVal.toLowerCase()))
+      },
+      searchValue: state => state.searchVal
     },
     mutations: {
       GET_PRODUCTS(state, products) {
         state.products = products
-        },
+      },
 
+      GET_PRODUCT(state, product) {
+        state.product = product
+      },
 
       ADD_PRO:state=>{
         state.res='Product is added successfully'
@@ -25,9 +35,13 @@ export default {
       ERR: state =>{
         state.res=''
         state.err='Fel to add a new product'
+      },
+      SEARCH: (state, val) => {
+        state.searchVal = val
       }
     },
     actions: {
+      //Get all the products
       getProducts({ commit }) {
         axios.get('/products')
         .then(response => {
@@ -35,12 +49,24 @@ export default {
         })
         },
 
+     //Get one Product
+     getProduct({ commit },id) {
+      axios.get('/products/'+id)
+      .then(response => {
+        commit('GET_PRODUCT', response.data)
+      })
+      },
+
       //add new Product
       addProduct({ commit },payload){
        
         axios.post('/products/new',payload.product, {headers:{'Authorization': `Bearer ${payload.token}`}})
         .then(res=> commit('ADD_PRO',res))
         .catch(()=>commit('ERR'))
+      },
+
+      search: ({commit}, val) => {
+        commit('SEARCH', val)
       }
 
     }

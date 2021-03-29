@@ -13,12 +13,11 @@ exports.getone=(req,res)=>{
 
 exports.saveShoppings=(req,res)=>{
 
- Card.findOne({_id:req.body._id})
-   
  const collection = new Card({
 
     _id:req.body._id,
     cartContents:req.body.cartContents
+    
    })
     collection.save()
     .then(()=>{
@@ -28,6 +27,7 @@ exports.saveShoppings=(req,res)=>{
          message:'successful'
      })
     })
+
      .catch(()=>{
         res.status(500).json({
             statusCode:500,
@@ -35,6 +35,7 @@ exports.saveShoppings=(req,res)=>{
             message:'can not add to DB'
         })
      })
+   
 }
 
 exports.updateCart = (req, res) => {

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '@/axios'
 export default{
     state: {
         shoppings:[],
@@ -43,9 +43,9 @@ export default{
         },
         
         SAVE:(state,res)=>{
-            console.log(res.statusCode)
+            
             state.statusCode=res.statusCode
-            console.log(state.statusCode)
+           
         },
 
         USER_CART:(state,data)=>{
@@ -72,35 +72,51 @@ export default{
 
       //send shopping cart to database
         postCart:({commit},payload)=>{
-                axios.post('http://localhost:9999/api/shoppings/add',{
-                  _id:payload._id,
-                  cartContents:payload.cart
-                },
-                {headers:{'Authorization': `Bearer ${payload.token}`}}
-                )
+         let id=payload._id
+         axios.get('/shoppings/'+id)
+         .then(res=>{
+           commit('SAVE',res)
+           if(res.data){
+             axios.put('/shoppings/'+payload._id,
+                 {cartContents:payload.cart},
+                  {headers:{'Authorization': `Bearer ${payload.token}`}} )
+                  .then(res=>console.log(res))
+             
+           }
+           else{
+            axios.post('/shoppings/add',{
+              _id:payload._id,
+             cartContents:payload.cart
+           },
+           {headers:{'Authorization': `Bearer ${payload.token}`}}
+           )
+           
+           .then(res=>{
+             commit('SAVE',res.data)
+             console.log(res)
+           })
+           } }) 
+        
+          // axios.post('/shoppings/add',{
+          //         _id:payload._id,
+          //         cartContents:payload.cart
+          //       },
+          //       {headers:{'Authorization': `Bearer ${payload.token}`}}
+          //       )
                 
-                .then(res=>commit('SAVE',res.data))
-                  .catch(()=>{
-                   let url='http://localhost:9999/api/shoppings/'+payload._id
-                       axios.put(url,
-                        {cartContents:payload.cart},
-                        {headers:{'Authorization': `Bearer ${payload.token}`}}
+          //       .then(res=>{
+          //         commit('SAVE',res.data)
+          //         console.log(res)
+          //       })
+          //       .catch(()=>{
+                  
+          //              axios.put('/shoppings/'+payload._id,
+          //               {cartContents:payload.cart},
+          //               {headers:{'Authorization': `Bearer ${payload.token}`}}
                         
-                        )
-                        .then(res=>console.log(res))
-                  //    fetch(url, {
-                  //        method: 'PUT',
-                  //        headers: {
-                  //          'Content-type': 'application/json; charset=UTF-8', 
-                  //          'Authorization': `Bearer ${payload.token}`
-                  //        },
-                  //        body: JSON.stringify({
-                  //        cartContents:payload.cart,
-                  //    })
-                  //  })
-                  //  .then(res=>res.json())
-                  //  .then(data=>commit('UPDATE',data))  
-                 }) 
+          //               )
+          //               .then(res=>console.log(res))
+          //        }) 
                },
            
 
@@ -111,6 +127,7 @@ export default{
 
             axios.get(url)
             .then((res)=>{
+              if(res.data)
               commit('USER_CART',res.data.cartContents)
             })
           },

@@ -108,3 +108,26 @@ exports.login = (req, res) => {
       }
     })
 }
+
+exports.updateUser = (req, res) => {
+  
+  User.updateOne( { _id: req.params.id }, {
+    ...req.body,
+    modified: Date.now()
+  })
+  .then(() => {
+    res.status(200).json({
+      statusCode: 200,
+      status: true,
+      message: 'user updated'
+    })
+  })
+  .catch(() => {
+    res.status(500).json({
+      statusCode: 500,
+      status: false,
+      message: 'Failed to update user'
+    })
+  })
+
+}

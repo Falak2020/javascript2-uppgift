@@ -1,33 +1,27 @@
 <template>
-  <div class="container">
-    
-    <div v-if="!token" class="border p-5 bg-white mt-5">
+  <div  class="container"> 
+    <div class="border p-5 bg-white mt-5">
       <h5 class="mb-3">Welcome to our e-commerce website, please enter your user information</h5>
           <form class=" p-3"  @submit.prevent="loginUser" >
              
                <input type="email" placeholder="Enter your email" class="form-control border mb-4" v-model="email" />
-         
-  
                <input type="password"  class="form-control border" v-model="password" placeholder="Enter your password"/>
          
-            <button  type="submit" class="btn btn-info form-control mt-5 text-white text-uppercase mb-3">Log in</button>    
-            <div class="text-center mt-2">
-               <p>Not a member? <router-link to="/register">Register</router-link></p>
-            </div>
+               <button  type="submit" class="btn btn-info form-control mt-5 text-white text-uppercase mb-3">Log in</button>    
+               <div class="text-center mt-2">
+                  <p>Not a member? <router-link to="/register">Register</router-link></p>
+             </div>
          </form>
     </div>
-    <div v-else class="text-success text-center mt-5">
-       <h3>Welcome {{username}}, have a nice time in our site</h3>
-       <home/>
-    </div>
+   
     <small class="text-danger">{{error}}</small>  
-  </div> 
+  </div>
 </template>
 <script>
 import { mapActions, mapGetters} from 'vuex'
-import Home from './Home.vue'
+
 export default {
-  components: { Home },
+  
     data(){
         return{
         
@@ -38,12 +32,18 @@ export default {
     methods:{
        ...mapActions(['login','getUserCart']),
        loginUser(){
+         let user={
+           email: this.email,
+           password: this.password,
+         }
+        let route = this.$route.query.redirect
         let payload = {
-            email: this.email,
-            password: this.password,
+            user:user,
+            route:route,
         }
-        this.login(payload)
         
+        this.login(payload)
+       
        },
        getCard(){
            if(this.token.length>0){
@@ -56,7 +56,7 @@ export default {
       ...mapGetters(['token','error','username','userId']),
 
     },
-    updated(){
+    destroyed(){
       this.getCard()
     }
 }

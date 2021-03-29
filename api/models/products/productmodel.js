@@ -22,17 +22,14 @@ exports.createP=(req,res)=>{
             message:'A product is already exists update it instead'
         })
    }
-
+       
     const  product=new Product({
            name:  req.body.name,
            short: req.body.short,
            desc:  req.body.desc,
            price: req.body.price,
            image: req.body.image
-        
        })
-
-       
        product.save()
        .then(()=>{
         res.status(201).json({
