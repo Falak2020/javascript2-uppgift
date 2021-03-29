@@ -103,7 +103,7 @@ exports.updateProduct = (req, res) => {
     exports.priceSort=(req,res)=>{
      
        Product.find()
-        .sort({price:-1})
+        .sort({price:1})
         .then(data=>{
           res.status(200).json(data)
         })

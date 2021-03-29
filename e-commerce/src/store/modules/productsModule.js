@@ -6,7 +6,8 @@ export default {
       product:null,
       res:'',
       err:'',
-      searchVal:''
+      searchVal:'',
+      sorted:[]
     },
     getters:{
       products: state => state.products,
@@ -16,7 +17,8 @@ export default {
       filteredProducts: state => {
         return state.products.filter(product => product.name.toLowerCase().match(state.searchVal.toLowerCase()))
       },
-      searchValue: state => state.searchVal
+      searchValue: state => state.searchVal,
+      sorted: state=> state.sorted
     },
     mutations: {
       GET_PRODUCTS(state, products) {
@@ -38,6 +40,11 @@ export default {
       },
       SEARCH: (state, val) => {
         state.searchVal = val
+      },
+
+      SORT: (state,data)=>{
+        state.sorted=data
+       
       }
     },
     actions: {
@@ -67,6 +74,14 @@ export default {
 
       search: ({commit}, val) => {
         commit('SEARCH', val)
+      },
+
+      sort:({commit})=>{
+        axios.get('/products/price/sort')
+        .then(res=>{
+         
+          commit('SORT',res.data)})
+        
       }
 
     }

@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const cartModel = require('./models/shoppingCart/cartModel');
-const auth=require('./authentication/auth')
+const cartModel = require('../models/shoppingCart/cartModel');
+const auth=require('../authentication/auth')
 // router.post('/add',cartModel.saveProduct);
 
 

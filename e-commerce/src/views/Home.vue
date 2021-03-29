@@ -5,13 +5,23 @@
   <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
     aria-describedby="search-addon" v-model="searchVal" @keyup="search(searchVal)"/>
   <button type="button" class="btn bg text-white">search</button>
+  <button type="botton" class="btn btn-info ms-2" @click="sortNow" >sort <i class="fas fa-sort-amount-down-alt"></i></button>
 </div>
-  <div class="container row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5 m-auto">
-
-       <div v-for="product in filteredProducts" :key="product._id" class=" col " >
+  
+      <div v-if="!sortkort">
+        <div  class="container row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5 m-auto">
+         <div  v-for="product in filteredProducts" :key="product._id" class=" col " >
            <products-list :product="product"/>
-       </div>  
-   </div>
+         </div>
+        </div>
+      </div>
+      <div v-else>
+         <div  class="container row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5 m-auto">
+         <div  v-for="product in sorted" :key="product._id" class=" col " >
+           <products-list :product="product"/>
+         </div>
+        </div>
+      </div>
 </div>
    
 </template>
@@ -24,14 +34,19 @@ export default {
   name: 'Home',
   data(){
     return{
-      searchVal:''
+      searchVal:'',
+      sortkort:false,
     }
   },
   methods: {
-    ...mapActions(['getProducts','search'])
+    ...mapActions(['getProducts','search','sort']),
+    sortNow(){
+      this.sortkort= !this.sortkort,
+      this.sort()
+    }
   },
   computed: {
-    ...mapGetters(['products','searchValue','filteredProducts'])
+    ...mapGetters(['products','searchValue','filteredProducts','sorted'])
   },
   created() {
     this.getProducts()
@@ -41,6 +56,8 @@ export default {
 
 }
 </script>
-<style >
-
+<style scoped>
+ i{
+   font-size: 1rem;
+ }
 </style>

@@ -113,7 +113,7 @@ exports.updateUser = (req, res) => {
   let salt1 = bcrypt.genSaltSync(10);
  
   bcrypt.hash(req.body.passwordHash, salt1, (err, hash1) => {
-   console.log('myyyyyyy'+hash1)
+   
     if (err) {
       return res.status(500).json({
         statusCode: 500,
