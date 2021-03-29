@@ -87,7 +87,6 @@ exports.login = (req, res) => {
                 message: 'correct email ',
                 token: auth.generateToken(user),
                 username:user.firstName,
-                user: user,
                 userId:user._id,
                 role:user.role
               })

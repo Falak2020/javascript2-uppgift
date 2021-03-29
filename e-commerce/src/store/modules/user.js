@@ -5,21 +5,21 @@ export default {
       token:'',
       error:'',
       status:'Login',
-      user:null,
       userId:'',
       result:'',
       errormsg:'',
-      role:''
+      role:'',
+      changePassword:''
     },
     getters:{
       token: state => state.token,
       error: state => state.error,
       status:state=> state.status,
-      user:state=>state.user,
       userId:state=>state.userId,
       result:state=>state.result,
       errormsg:state=>state.errormsg,
-      role: state=> state.role
+      role: state=> state.role,
+      changePassword : state=> state.changePassword
     },
     mutations: {
       RESULT_TRUE:(state)=>{
@@ -38,16 +38,16 @@ export default {
       },
       GET_TOKEN(state,data) {
         state.error=''
-        state.token = data.token,
-        state.user = data.user
-        console.log(state.user)
+        state.token = data.token
         state.userId = data.userId 
         state.role = data.role
         state.status = 'Logout'
       },
+
       GET_ERROR(state) {
         state.error = 'Incorrect email or password'
       },
+
       DELETE_TOKEN(state) {
         state.token='' ,
         state.status='Login',
@@ -76,6 +76,12 @@ export default {
         }
         }
         catch{(err)=>console.log(err)}
+      },
+      UPDATED:(state,status)=>{
+        if(status==200)
+        state.changePassword='The password is changed successfully'
+        else
+        state.changePassword='Error to change the password'
       }
     },
     actions: {
@@ -135,6 +141,9 @@ export default {
       commit('CHECK_USER')
     },
 
+
+    //Change Password
+
     updateUser({commit},updated){
       let newPassword=updated.newPassword
       console.log(newPassword)
@@ -143,7 +152,7 @@ export default {
       }
       )
       .then(res=>{
-        commit('UPDATED',res)
+        commit('UPDATED',res.status)
         console.log(res)
       })
     }
