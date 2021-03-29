@@ -12,7 +12,7 @@ router.delete('/:id',auth.verifyToken, products.deleteP)
 
 // router.get('/price/sort', products.priceSort)
 
-// router.get('/limit/:num', products.limitProduct)
+router.get('/limit/:num', products.limitProduct)
  
 
 module.exports=router

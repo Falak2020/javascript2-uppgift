@@ -43,7 +43,7 @@ export default {
     actions: {
       //Get all the products
       getProducts({ commit }) {
-        axios.get('/products')
+        axios.get('/products/limit/6')
         .then(response => {
           commit('GET_PRODUCTS', response.data)
         })

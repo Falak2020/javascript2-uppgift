@@ -12,8 +12,8 @@
             </p>     
       </div>
        <div class="text-end  d-flex justify-content-between">
-                <router-link type='btn' class="btn btn-info" :to="{ path: '/productDetails/'+product._id}">More Details</router-link>
-                <button   @click="addToCart"><i class="fas fa-shopping-bag"></i></button>    
+                <router-link type='btn' class="btn btn-info shadow-lg" :to="{ path: '/productDetails/'+product._id}">More Details</router-link>
+                <button @click="addToCart" ><i class="fas fa-shopping-bag "></i></button>    
       </div>
     </div>
 </template>
@@ -45,18 +45,6 @@ export default {
           token:this.token
        }
       this.postCart(payload)
-      //      if(this.res){
-      //        console.log('Cart is add successfully')
-      //      }
-      //      else{
-      //        let payload={
-      //         _id:this.userId,
-      //         cart:this.shoppings 
-      //     } 
-      //   this.updateCart(payload)
-      // }
-       
-      
       }
     }
   }
@@ -70,6 +58,9 @@ export default {
  }
  i{
    font-size: 2rem;
+ }
+ i:hover{
+   color: rgb(13, 156, 13);
  }
  button{
    background: transparent;
