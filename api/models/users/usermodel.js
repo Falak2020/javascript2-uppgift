@@ -87,6 +87,7 @@ exports.login = (req, res) => {
                 message: 'correct email ',
                 token: auth.generateToken(user),
                 username:user.firstName,
+                user: user,
                 userId:user._id,
                 role:user.role
               })
@@ -110,9 +111,21 @@ exports.login = (req, res) => {
 }
 
 exports.updateUser = (req, res) => {
-  
+  let salt1 = bcrypt.genSaltSync(10);
+ 
+  bcrypt.hash(req.body.passwordHash, salt1, (err, hash1) => {
+   console.log('myyyyyyy'+hash1)
+    if (err) {
+      return res.status(500).json({
+        statusCode: 500,
+        status: false,
+        message: 'Failed when encrypting user password'
+      })
+    }
+ 
   User.updateOne( { _id: req.params.id }, {
     ...req.body,
+    passwordHash:hash1,
     modified: Date.now()
   })
   .then(() => {
@@ -129,5 +142,5 @@ exports.updateUser = (req, res) => {
       message: 'Failed to update user'
     })
   })
-
+ })
 }

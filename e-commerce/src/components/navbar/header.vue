@@ -40,7 +40,7 @@
             <li  @click="logoutUser" class="text-center drophover  mb-2" ><router-link to='/login' class="text-dark item " >{{status}}</router-link></li>
             <li  class="text-center drophover"><router-link to='/register' class="text-dark " >Sign up</router-link></li>
             <li v-if="status=='Logout'"><hr class="dropdown-divider" /></li>
-            <li  class="text-center mt-3 drophover" v-if="status=='Logout'"><router-link to='/userSetting' class="text-dark" ><i class="fas fa-cogs me-2"></i>Settings</router-link></li>
+            <li  class="text-center mt-3 drophover" v-if="status=='Logout'"><router-link to='/userSettings' class="text-dark" ><i class="fas fa-cogs me-2"></i>Settings</router-link></li>
             <li  class="text-center mt-2 drophover" v-if="role=='admin'"><router-link to='/newProduct' class="text-dark" >Add Product</router-link></li>
           </ul>   
         </li>

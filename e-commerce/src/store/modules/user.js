@@ -5,7 +5,7 @@ export default {
       token:'',
       error:'',
       status:'Login',
-      username:'',
+      user:null,
       userId:'',
       result:'',
       errormsg:'',
@@ -15,7 +15,7 @@ export default {
       token: state => state.token,
       error: state => state.error,
       status:state=> state.status,
-      username:state=>state.username,
+      user:state=>state.user,
       userId:state=>state.userId,
       result:state=>state.result,
       errormsg:state=>state.errormsg,
@@ -39,7 +39,8 @@ export default {
       GET_TOKEN(state,data) {
         state.error=''
         state.token = data.token,
-        state.username = data.username
+        state.user = data.user
+        console.log(state.user)
         state.userId = data.userId 
         state.role = data.role
         state.status = 'Logout'
@@ -91,7 +92,7 @@ export default {
         console.log(res)
         if(res.status==201){
            commit('RESULT_TRUE')
-           router.push('/')
+           
         }
         
       }
@@ -112,7 +113,7 @@ export default {
          
           localStorage.setItem("data", JSON.stringify(response.data))
           commit('GET_TOKEN',response.data)
-          
+
           if(payload.route) {
             router.push(payload.route)
           } else {
@@ -132,6 +133,19 @@ export default {
 
     checkUser({commit}){
       commit('CHECK_USER')
+    },
+
+    updateUser({commit},updated){
+      let newPassword=updated.newPassword
+      console.log(newPassword)
+      axios.put('/users/'+updated._id,{
+         passwordHash:updated.newPassword
+      }
+      )
+      .then(res=>{
+        commit('UPDATED',res)
+        console.log(res)
+      })
     }
 
     }
