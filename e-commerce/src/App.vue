@@ -1,17 +1,23 @@
 <template>
-  <div class="mb-5" >
+  <div class="page-container" >
     <Appheader/> 
-    <div class="container mt-3">
+    <div class="container mt-3 h-100">
        <router-view/>
-    </div> 
+     </div> 
+     <div class="footer">
+       <appfooter />
+     </div>
+    
   </div>
 </template>
 <script>
 import Appheader from'./components/navbar/header'
+import appfooter from './components/navbar/footer'
 import {mapActions, mapGetters} from 'vuex'
 export default {
    components:{
-     Appheader
+     Appheader,
+     appfooter
    },
    computed:{
      ...mapGetters(['userId','token'])
@@ -43,5 +49,16 @@ export default {
     }
     .text-color{
       color: #0D47A1;
+    }
+    .page-container {
+      position: relative;
+      min-height: 100vh;
+}
+    .footer{
+       
+           position: absolute;
+            bottom: 0;
+            width: 100%;
+          
     }
 </style>
