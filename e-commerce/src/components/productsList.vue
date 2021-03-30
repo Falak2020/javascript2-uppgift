@@ -13,7 +13,7 @@
       </div>
        <div class="text-end  d-flex justify-content-between">
                 <router-link type='btn' class="btn btn-info shadow-lg" :to="{ path: '/productDetails/'+product._id}">More Details</router-link>
-                <button @click="addToCart" ><i class="fas fa-shopping-bag "></i></button>    
+                <button @click="addToCart" ><i  class="fas fa-shopping-bag"></i></button>    
       </div>
     </div>
 </template>
@@ -58,6 +58,7 @@ export default {
  }
  i{
    font-size: 2rem;
+  
  }
  i:hover{
    color: rgb(13, 156, 13);
@@ -65,6 +66,7 @@ export default {
  button{
    background: transparent;
    border: none;
+  
  }
  img{
    height: 350px;

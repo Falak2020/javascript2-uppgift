@@ -1,6 +1,6 @@
 <template>
   <div v-if="product!=null" class="container" >
-    <div class="card mt-5" >
+    <div class="card mt-5 p-3" >
       <div class="row g-0">
          <div class="col-md-4">
            <img :src="product.image" alt="..." class="img-fluid"/>

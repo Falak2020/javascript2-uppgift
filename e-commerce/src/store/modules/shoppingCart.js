@@ -2,9 +2,7 @@ import axios from '@/axios'
 export default{
     state: {
         shoppings:[],
-        statusCode:0,
         userCart:[]
-
     },
     getters:{
 
@@ -42,10 +40,8 @@ export default{
             
         },
         
-        SAVE:(state,res)=>{
-            
-            state.statusCode=res.statusCode
-           
+        SAVE:()=>{
+            console.log('the object is updated') 
         },
 
         USER_CART:(state,data)=>{
@@ -56,6 +52,9 @@ export default{
         CLEAR:(state)=>{
             state.shoppings=[]
         },
+        DEL_DB:()=>{
+          console.log('the object is deleted from DB')
+        }
 
     },
     ////////////////////////////////////////////////
@@ -73,10 +72,11 @@ export default{
       //send shopping cart to database
         postCart:({commit},payload)=>{
          let id=payload._id
-         axios.get('/shoppings/'+id)
+         axios.get('/shoppings/'+id)//if there is an object in db with the same id then make update otherwise send the data
          .then(res=>{
-           commit('SAVE',res)
+
            if(res.data){
+            commit('SAVE')
              axios.put('/shoppings/'+payload._id,
                  {cartContents:payload.cart},
                   {headers:{'Authorization': `Bearer ${payload.token}`}} )
@@ -92,32 +92,11 @@ export default{
            )
            
            .then(res=>{
-             commit('SAVE',res.data)
              console.log(res)
            })
            } }) 
         
-          // axios.post('/shoppings/add',{
-          //         _id:payload._id,
-          //         cartContents:payload.cart
-          //       },
-          //       {headers:{'Authorization': `Bearer ${payload.token}`}}
-          //       )
-                
-          //       .then(res=>{
-          //         commit('SAVE',res.data)
-          //         console.log(res)
-          //       })
-          //       .catch(()=>{
-                  
-          //              axios.put('/shoppings/'+payload._id,
-          //               {cartContents:payload.cart},
-          //               {headers:{'Authorization': `Bearer ${payload.token}`}}
-                        
-          //               )
-          //               .then(res=>console.log(res))
-          //        }) 
-               },
+        },
            
 
  // Bring the users shopping cart from database 
@@ -136,7 +115,15 @@ export default{
           commit('CLEAR')
         },
 
-       
+  //Delete the shopping cart from db
+     deleteDB:({commit},payload)=>{
+     
+       axios.delete('/shoppings/'+payload._id,
+        {headers:{'Authorization': `Bearer ${payload.token}`}})
+       .then(res=>{
+         commit('DEL_DB',res)})
+
+     }
     }
     
   }

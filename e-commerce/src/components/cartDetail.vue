@@ -6,25 +6,26 @@
               </div>
               <div class="col-md-9">
                  <div class="d-flex justify-content-between mt-3">
-                     <h2  >{{item.shop.name}}</h2>
-                     <div class="text-end"> 
-                   <!-- <button class="btn btn-bg text-white" @click="add" >+</button> -->
-                         <label for="number"> QTY = </label>
-                         <input type="number" id="number" @click="changeQTY"  v-model="qnt">
-                    <!-- <button class="btn btn-bg ms-2 text-white" @click="remove">-</button>  -->
-                   </div>
+                     <h4  >{{item.shop.name}}</h4>
+                     
                 </div>
                  <div class="card-body">
                      <p class="card-title">{{item.shop.short}}</p>
                      <small><i class="fas fa-truck me-2"></i>Faster delivery</small>
                      
                  </div> 
+                 <div class="text-end"> 
+                   <!-- <button class="btn btn-bg text-white" @click="add" >+</button> -->
+                         <label for="number"><strong> QTY = </strong></label>
+                         <input type="number" id="number" @click="changeQTY"  v-model="qnt">
+                    <!-- <button class="btn btn-bg ms-2 text-white" @click="remove">-</button>  -->
+                   </div>
               </div>
                
               <div  class="text-end mt-5 d-flex justify-content-between">
                  <strong>Quantity: {{item.quantity}}st </strong>
                  <strong>Price: {{item.quantity*item.shop.price}} kr</strong> 
-                 <p class="text-danger"><button class="border-0 bg-transparent text-danger" @click="Delete"><i class="fas fa-trash me-2 " ></i></button>Delete order</p>
+                 <p class="text-danger pointer"  @click="Delete"><button class="border-0 bg-transparent text-danger"><i class="fas fa-trash me-2 " ></i></button>Delete order</p>
               </div> 
            </div> 
           <hr class="solid">
@@ -48,7 +49,7 @@ export default {
  },
  methods:{
 
-  ...mapActions(['deleteOrder','postCart']),
+  ...mapActions(['deleteOrder','postCart','deleteDB']),
 
  changeQTY(){
     if(this.qnt>this.item.quantity){
@@ -81,7 +82,10 @@ export default {
           cart:this.shoppings,
           token:this.token
        }
-      this.postCart(payload)
+       if(this.shoppings.length==0)
+          this.deleteDB(payload)
+       else
+           this.postCart(payload)
    }
   }
  }
@@ -97,5 +101,8 @@ export default {
 }
 img{
    max-height: 200px;
+}
+.pointer{
+   cursor: pointer;
 }
 </style>

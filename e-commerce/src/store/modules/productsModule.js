@@ -50,7 +50,7 @@ export default {
     actions: {
       //Get all the products
       getProducts({ commit }) {
-        axios.get('/products/limit/6')
+        axios.get('/products/limit/50')
         .then(response => {
           commit('GET_PRODUCTS', response.data)
         })

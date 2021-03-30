@@ -66,23 +66,21 @@ exports.updateCart = (req, res) => {
 
     exports.deleteOrder=(req,res)=>{
       
-      console.log(req.cartContents)
-      
+      Card.deleteOne({_id:req.params.id})
+      .then(()=>res.status(200).json({
+        statusCode: 200,
+        status: true,
+        message: 'Deleted'
+      })
+    )
+      .catch(() => {
+        res.status(500).json({
+          statusCode: 500,
+          status: false,
+          message: ' Failed to delete'
+        })
+       } )
+    }
 
-    //     element[0][0].deleteOne({_id:req.params.id})
-    //   .then(()=>res.status(200).json({
-    //     statusCode: 200,
-    //     status: true,
-    //     message: 'Deleted'
-    //   })
-    // )
-    //   .catch(() => {
-    //     res.status(500).json({
-    //       statusCode: 500,
-    //       status: false,
-    //       message: ' Failed to delete'
-    //     })
-    //    } )
-    //   });
       
-      }
+   
