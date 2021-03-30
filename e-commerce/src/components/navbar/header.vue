@@ -37,11 +37,11 @@
            </a>
           <!-- Dropdown menu -->
           <ul  class="dropdown-menu p-3 " aria-labelledby="navbarDropdown">
-            <li  @click="logoutUser" class="text-center drophover  mb-2" ><router-link to='/login' class="text-dark item " >{{status}}</router-link></li>
-            <li  class="text-center drophover"><router-link to='/register' class="text-dark " >Sign up</router-link></li>
+            <li  @click="logoutUser" class="text-center border  mb-2 dropdown-item" ><router-link to='/login' class="text-dark item  py-2 px-5" >{{status}}</router-link></li>
+            <li  class="text-center dropdown-item"><router-link to='/register' class="text-dark " >Sign up</router-link></li>
             <li v-if="status=='Logout'"><hr class="dropdown-divider" /></li>
-            <li  class="text-center mt-3 drophover" v-if="status=='Logout'"><router-link to='/userSettings' class="text-dark" ><i class="fas fa-cogs me-2"></i>Settings</router-link></li>
-            <li  class="text-center mt-2 drophover" v-if="role=='admin'"><router-link to='/newProduct' class="text-dark" >Add Product</router-link></li>
+            <li  class="text-center mt-3 dropdown-item " v-if="status=='Logout'"><router-link to='/userSettings' class="text-dark" ><i class="fas fa-cogs me-2"></i>Settings</router-link></li>
+            <li  class="text-center mt-2 dropdown-item" v-if="role=='admin'"><router-link to='/newProduct' class="text-dark" >Add Product</router-link></li>
           </ul>   
         </li>
         <li>
@@ -101,10 +101,7 @@ export default {
    font-size: 1rem;
  }
  
- .drophover:hover{
-   background-color: rgb(58, 98, 173);
-   color: #ffffff;
- }
+ 
 
  .pos-r{
    position: relative;
