@@ -86,7 +86,7 @@ export default{
            else{
             axios.post('/shoppings/add',{
               _id:payload._id,
-             cartContents:payload.cart
+              cartContents:payload.cart
            },
            {headers:{'Authorization': `Bearer ${payload.token}`}}
            )
