@@ -30,7 +30,7 @@ export default {
         }    
     },
     methods:{
-       ...mapActions(['login','getUserCart']),
+       ...mapActions(['login','getUserCart','clearValue']),
        loginUser(){
          let user={
            email: this.email,
@@ -58,6 +58,7 @@ export default {
     },
     destroyed(){
       this.getCard()
+      this.clearValue()
     }
 }
 </script>

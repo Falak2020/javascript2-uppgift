@@ -35,6 +35,7 @@ export default {
       CLEAR_VALUE:state=>{
         state.result=''
         state.errormsg=''
+        state.error=''
       },
       GET_TOKEN(state,data) {
         state.error=''
@@ -96,7 +97,7 @@ export default {
 
         const res =   await axios.post('/users/register',_user)
         dispatch('login', {user})
-       
+
         if(res.status==201){
            commit('RESULT_TRUE')
            
@@ -108,7 +109,6 @@ export default {
       }
       
     },
-
 
     clearValue:({commit})=>{
         commit('CLEAR_VALUE')
