@@ -86,16 +86,17 @@ export default {
     },
     actions: {
 
-    registerUser:async({dispatch,commit},user)=>{
-      console.log(user.role)
-      const payload = {
-        email: user.email,
-        password: user.password
+    registerUser:async({dispatch,commit},_user)=>{
+      // console.log(user.role)
+      const user = {
+        email: _user.email,
+        password: _user.password
       }
       try{
-        const res =   await axios.post('/users/register',user)
-        dispatch('login', payload)
-        console.log(res)
+
+        const res =   await axios.post('/users/register',_user)
+        dispatch('login', {user})
+       
         if(res.status==201){
            commit('RESULT_TRUE')
            
@@ -125,8 +126,6 @@ export default {
           } else {
             router.push('/')
           }
-
-          // setTimeout(function(){ router.push('/') }, 2000);
          
         })
         .catch(()=> commit('GET_ERROR'))
