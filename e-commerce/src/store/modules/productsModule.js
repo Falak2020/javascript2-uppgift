@@ -49,8 +49,9 @@ export default {
     },
     actions: {
       //Get all the products
+      // axios.get('/products/limit/9') if i want limited products
       getProducts({ commit }) {
-        axios.get('/products/limit/9')
+        axios.get('/products')
         .then(response => {
           commit('GET_PRODUCTS', response.data)
         })

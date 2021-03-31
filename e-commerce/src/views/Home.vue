@@ -9,11 +9,14 @@
       </div>
      
       <div v-if="!sortkort">
-        <div  class="container row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5 ">
-         <div  v-for="product in filteredProducts" :key="product._id" class=" col" >
-           <products-list :product="product"/>
-         </div>
+        <div  class="container row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-5  m-auto">
+         <div  v-for="(product,index) in filteredProducts" :key="product._id" class=" col" >
+           <products-list v-if="index<limitationList"  :product="product"/>
+         </div>   
         </div>
+        <div class=" mt-3" :class="textShow">
+            <i :class="showclass" ref="btn"  @click="Show" class="i-style">Show More</i>
+         </div>
       </div>
        <!--when we click on sort-->
       <div v-else>
@@ -37,6 +40,9 @@ export default {
     return{
       searchVal:'',
       sortkort:false,
+      limitationList:9,
+      more:true,
+      less:false
     }
   },
   methods: {
@@ -44,10 +50,48 @@ export default {
     sortNow(){
       this.sortkort= !this.sortkort,
       this.sort()
-    }
+    },
+    Show(){
+       if (this.limitationList <this.products.length) {
+         this.limitationList = this.products.length
+         this.more=false
+         this.less=true
+         this.$refs.btn.textContent='Show Less'
+       }else{
+        this.limitationList = 6
+        this.more=true
+        this.less=false
+        this.$refs.btn.textContent='Show More'
+      }
+     }
+  
   },
   computed: {
-    ...mapGetters(['products','searchValue','filteredProducts','sorted'])
+    ...mapGetters(['products','searchValue','filteredProducts','sorted']),
+    showclass(){
+      if(this.more){
+        return {
+          'fas fa-angle-right text-info ':true
+        }
+      }
+      else{
+        return {
+          'fas fa-less-than text-success':true
+        }
+      }
+    },
+    textShow(){
+      if(this.more){
+        return {
+          'text-end':true
+        }
+      }
+      else{
+        return {
+          'text-start':true
+        }
+      }
+    }
   },
   created() {
     this.getProducts()
@@ -60,5 +104,8 @@ export default {
 <style scoped>
  i{
    font-size: 1rem;
+ }
+ .i-style{
+   font-size: 1.5rem;
  }
 </style>
