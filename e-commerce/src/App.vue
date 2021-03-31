@@ -1,9 +1,11 @@
 <template>
   <div class="page-container" >
-    <Appheader/> 
-    <div class="container mt-3 h-100">
-       <router-view/>
-     </div> 
+    <div id="content">
+       <Appheader /> 
+       <div class="container">
+           <router-view />
+      </div> 
+     </div>
      <div class="footer">
        <appfooter />
      </div>
@@ -53,12 +55,15 @@ export default {
     .page-container {
       position: relative;
       min-height: 100vh;
-}
+     }
     .footer{
+       position: absolute;
+       bottom: 0;
+       width: 100%;
        
-           position: absolute;
-            bottom: 0;
-            width: 100%;
-          
     }
+    #content {
+        padding-bottom: 10rem; 
+     }
+ 
 </style>
