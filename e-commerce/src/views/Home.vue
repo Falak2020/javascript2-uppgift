@@ -5,7 +5,7 @@
         <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
           aria-describedby="search-addon" v-model="searchVal" @keyup="search(searchVal)"/>
          <button type="button" class="btn bg text-white">search</button>
-         <button type="botton" class="btn btn-info ms-2" @click="sortNow" >sort <i class="fas fa-sort-amount-down-alt"></i></button>
+         <button type="botton" ref="btnSort" class="btn btn-info ms-2" @click="sortNow" >sort </button>
       </div>
      
       <div v-if="!sortkort">
@@ -48,8 +48,16 @@ export default {
   methods: {
     ...mapActions(['getProducts','search','sort']),
     sortNow(){
-      this.sortkort= !this.sortkort,
-      this.sort()
+      if(!this.sortkort){
+       this.sortkort= !this.sortkort,
+       this.sort()
+       this.$refs.btnSort.textContent='un sort'
+      }
+      else{
+          this.sortkort= !this.sortkort,
+          this.$refs.btnSort.textContent='sort'
+      }
+      
     },
     Show(){
        if (this.limitationList <this.products.length) {
@@ -102,9 +110,7 @@ export default {
 }
 </script>
 <style scoped>
- i{
-   font-size: 1rem;
- }
+ 
  .i-style{
    font-size: 1.5rem;
  }
