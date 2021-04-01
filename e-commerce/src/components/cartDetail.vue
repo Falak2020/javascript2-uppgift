@@ -38,9 +38,7 @@ export default {
  props:['item'],
  data(){
      return{
-
-      qnt:this.item.quantity
-
+      qnt:this.item.quantity,
      }
  },
  computed:{
@@ -49,11 +47,10 @@ export default {
  methods:{
 
   ...mapActions(['deleteOrder','postCart','deleteDB']),
-
+     
  changeQTY(){
 
-     this.item.quantity= parseInt(this.qnt)
-
+      this.item.quantity= parseInt(this.qnt)
       if(this.qnt<1)
        this.deleteOrder(this.item)
       if(this.userId.length>0){
@@ -66,9 +63,9 @@ export default {
            if(this.shoppings.length==0)
                 this.deleteDB(payload)
            else
-                this.postCart(payload)
+                this.postCart(payload) //send to DB
        }
-   
+   sessionStorage.setItem("shoppingcart", JSON.stringify(this.shoppings))
  },
 
 
@@ -82,12 +79,15 @@ export default {
           token:this.token
        }
        if(this.shoppings.length==0)
-          this.deleteDB(payload)
+          this.deleteDB(payload)  //Delete from db
        else
            this.postCart(payload)
    }
   }
- }
+ },
+ 
+    
+ 
 }
 </script>
 

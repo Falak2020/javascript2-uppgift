@@ -53,7 +53,7 @@ export default {
        }
     },
     computed:{
-      ...mapGetters(['token','error','username','userId']),
+      ...mapGetters(['token','error','userId']),
 
     },
     destroyed(){

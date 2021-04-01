@@ -22,7 +22,10 @@ export default{
                 total+=element.quantity*element.shop.price
             })
             return total
-        }
+        },
+
+       
+
     },
     mutations: {
         ADD_TO:(state,{shop,quantity})=>{
@@ -33,11 +36,13 @@ export default{
             else{
              state.shoppings.push({shop,quantity})
             }
+            
+            sessionStorage.setItem("shoppingcart", JSON.stringify(state.shoppings))
         },
        
         DELETE:(state,item)=>{
             state.shoppings=state.shoppings.filter(order=>order.shop._id!=item.shop._id)
-            
+            sessionStorage.setItem("shoppingcart", JSON.stringify(state.shoppings))
         },
         
         SAVE:()=>{
@@ -54,6 +59,11 @@ export default{
         },
         DEL_DB:()=>{
           console.log('the object is deleted from DB')
+        },
+        BRING:(state)=>{
+          let storageCart=JSON.parse(sessionStorage.getItem("shoppingcart"))
+          if(storageCart)
+          state.shoppings=storageCart
         }
 
     },
@@ -123,7 +133,11 @@ export default{
        .then(res=>{
          commit('DEL_DB',res)})
 
-     }
+     },
+
+      bringShoppingCart({commit}){
+        commit('BRING')
+      }
     }
     
   }

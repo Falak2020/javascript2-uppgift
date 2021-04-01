@@ -25,13 +25,18 @@ export default {
      ...mapGetters(['userId','token'])
    },
    methods:{
-     ...mapActions(['checkUser','getUserCart']),
+     ...mapActions(['checkUser','getUserCart','bringShoppingCart']),
    },
 
    created(){
      this.checkUser()
-     if(this.token)
-     this.getUserCart(this.userId)
+     if(this.token){
+      this.getUserCart(this.userId)
+     }
+     
+    else
+      this.bringShoppingCart()
+
    },
    
  }
