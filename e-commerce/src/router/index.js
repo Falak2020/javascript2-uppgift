@@ -8,8 +8,7 @@ import signup from '../views/register.vue'
 import contactUs from '../views/contactUs.vue'
 import settings from '../views/userSettings'
 import newProduct from '../views/newProduct'
-
-
+import notFound from '../views/NotFound'
 
 
 Vue.use(VueRouter)
@@ -59,7 +58,12 @@ const routes = [
     component: newProduct,
     meta: { authorize: true }
   },
+  {
+    path:'/:catchAll(.*)',
+    name:'notFound',
+    component:notFound
 
+  }
 
 ]
 
@@ -73,18 +77,21 @@ router.beforeEach((to, from, next) => {
   const { authorize } = to.meta
  
   let data = JSON.parse(localStorage.getItem("data"))
-  
+
   if(authorize) {
     if(!data){
-      next({path: '/login', query: { redirect: to.fullPath }})
+      if(to.fullPath=="/newProduct")
+         next({path: '/login'}) 
+      else
+        next({path: '/login', query: { redirect: to.fullPath }})
     } else {
      if(to.fullPath=="/newProduct"){
-     
+       
        if(data.role=="admin")
           next()
         else
-        {
-           next({path: '/'})
+        { 
+          next({path: '/'})
         }   
      }
       else
