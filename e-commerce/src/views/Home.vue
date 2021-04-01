@@ -14,8 +14,8 @@
            <products-list v-if="index<limitationList"  :product="product"/>
          </div>   
         </div>
-        <div class=" mt-3" :class="textShow">
-            <i :class="showclass" ref="btn"  @click="Show" class="i-style">Show More</i>
+        <div class=" mt-3 " :class="textShow">
+            <i :class="showclass" ref="btn"  @click="Show" class="i-style ">Show More</i>
          </div>
       </div>
        <!--when we click on sort-->
@@ -113,5 +113,6 @@ export default {
  
  .i-style{
    font-size: 1.5rem;
+   cursor: pointer;
  }
 </style>
