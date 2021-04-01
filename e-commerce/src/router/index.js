@@ -56,7 +56,8 @@ const routes = [
   {
     path: '/newProduct',
     name: 'newProduct',
-    component: newProduct
+    component: newProduct,
+    meta: { authorize: true }
   },
 
 
@@ -70,15 +71,25 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta
+  console.log(to.fullPath)
   let data = JSON.parse(localStorage.getItem("data"))
   
   if(authorize) {
-    if(!data) {
+    if(!data){
       next({path: '/login', query: { redirect: to.fullPath }})
     } else {
-      next()
+     if(to.fullPath=="/newProduct"){
+     
+       if(data.role=="admin")
+          next()
+        else
+        {
+           next({path: '/'})
+        }   
+     }
+      else
+      next()    
     }
-
   }
   next()
 })
