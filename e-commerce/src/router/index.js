@@ -71,7 +71,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta
-  console.log(to.fullPath)
+ 
   let data = JSON.parse(localStorage.getItem("data"))
   
   if(authorize) {
