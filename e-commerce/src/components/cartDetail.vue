@@ -15,16 +15,15 @@
                      
                  </div> 
                  <div class="text-end"> 
-                   <!-- <button class="btn btn-bg text-white" @click="add" >+</button> -->
                          <label for="number"><strong> QTY = </strong></label>
-                         <input type="number" id="number" @click="changeQTY"  v-model="qnt">
-                    <!-- <button class="btn btn-bg ms-2 text-white" @click="remove">-</button>  -->
+                         <input type="number" class="p-1" id="number" @change="changeQTY"  v-model="qnt">
+                    
                    </div>
               </div>
                
               <div  class="text-end mt-5 d-flex justify-content-between">
                  <strong>Quantity: {{item.quantity}}st </strong>
-                 <strong>Price: {{item.quantity*item.shop.price}} kr</strong> 
+                 <strong>Price:{{item.quantity}}st X {{item.shop.price}} = {{item.quantity*item.shop.price}} kr</strong> 
                  <p class="text-danger pointer"  @click="Delete"><button class="border-0 bg-transparent text-danger"><i class="fas fa-trash me-2 " ></i></button>Delete order</p>
               </div> 
            </div> 
@@ -52,24 +51,24 @@ export default {
   ...mapActions(['deleteOrder','postCart','deleteDB']),
 
  changeQTY(){
-    if(this.qnt>this.item.quantity){
-       this.item.quantity+=1 
-    }
-    else{
-      this.item.quantity-=1 
-      if(this.item.quantity==0){  //delete item when quantity is 0
-        this.deleteOrder(this.item)
-       }
-    }
 
-   if(this.userId.length>0){
-       let payload={
-          _id:this.userId,
-          cart:this.shoppings,
-          token:this.token
+     this.item.quantity= parseInt(this.qnt)
+
+      if(this.qnt<1)
+       this.deleteOrder(this.item)
+      if(this.userId.length>0){
+           let payload={
+              _id:this.userId,
+               cart:this.shoppings,
+               token:this.token
+           }
+
+           if(this.shoppings.length==0)
+                this.deleteDB(payload)
+           else
+                this.postCart(payload)
        }
-      this.postCart(payload)
-   }
+   
  },
 
 
